@@ -12,8 +12,9 @@ int main() {
 			set_motor(1, -128);
 			set_motor(2, -128);
 			sleep1(0, 500000);
-		} else {
-			set_motor(1, 0);
+		} else { //move forward
+			set_motor(1, 128);
+			set_motor(2, 128
 		}
 		adc_reading = read_analog(0);
 		sleep1(0, 5000);
