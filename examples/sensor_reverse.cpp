@@ -10,7 +10,7 @@ int main() {
 		printf("Reading: %d\n", adc_reading);
 		if(adc_reading > 100) { //move back
 			set_motor(1, -128);
-			set_motor(2, -128);
+			set_motor(2, 128);
 			sleep1(0, 500000);
 		} else { //move forward
 			set_motor(1, 128);
