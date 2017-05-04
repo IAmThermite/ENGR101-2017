@@ -93,13 +93,6 @@ We are still to complete the mockup for the robot and complete the chassis for t
 #### Review
 
 
-### Week 7
-**WIP**
-- [ ] 
-
-#### Review
-
-
 ### Weekly Progress Checklist
 * Each member completed their valid tasks
 * New goal for each member
