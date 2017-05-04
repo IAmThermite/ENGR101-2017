@@ -15,9 +15,10 @@
 ### Week 1
 - [x] Sort out team roles
 - [x] Team name
-- [ ] Sign team agreement
+- [x] Sign team agreement
 - [x] Create team schedule
-- [ ] Setup team GitHub Repository
+- [x] Setup team GitHub Repository
 - [ ] Ideal robot mockup
 
 #### Review
+We are still to complete the mockup for the robot and complete the chassis for the robot. We had problems with attaching the motors to the GPIO pins, however the code we wrote worked fine (examples/forward.cpp).
