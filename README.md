@@ -46,34 +46,35 @@ int main() {
 
 ## Weekly Checklists
 ### Week 1
-- [x] Sort out team roles
-- [x] Team name
-- [x] Sign team agreement
-- [x] Create team schedule
-- [x] Setup team GitHub Repository
-- [ ] Ideal robot mockup
+- [x] [ALL] Sort out team roles
+- [x] [ALL] Team name
+- [x] [ALL] Sign team agreement
+- [x] [ALL] Create team schedule
+- [x] [Luke] Setup team GitHub Repository
+- [ ] [Raven] Ideal robot mockup
 
 #### Review
 We are still to complete the mockup for the robot and complete the chassis for the robot. We had problems with attaching the motors to the GPIO pins, however the code we wrote worked fine (examples/forward.cpp).
 
 
 ### Week 2
-- [ ] Ideal robot mockup
-- [ ] Mounting for camera, IR, and motors
-- [ ] Wheel guiding system
-- [ ] Finish chassis
-- [ ] Code for forward, reverse, left, right, etc.
-- [ ] Test code
+- [ ] [Raven] Ideal robot mockup
+- [ ] [Raven] Mounting for camera, IR, and motors
+- [ ] [Raven] Wheel guiding system
+- [ ] [Raven] Finish chassis
+- [ ] [SOFTWARE] Code for forward, reverse, left, right, etc.
+- [ ] [ALL] Test code
 
 #### Review
 
 
 ### Week 3
 **WIP**
-- [ ] Camera code
-- [ ] WiFi gate works
-- [ ] Robot can follow line
-- [ ] Test code
+- [ ] [SOFTWARE] Camera code
+- [ ] [SOFTWARE] WiFi gate works
+- [ ] [SOFTWARE] Robot can follow line
+- [ ] [SOFTWARE] Test code
+- [ ] [Raven] Refine Robot Design
 
 #### Review
 
@@ -97,13 +98,13 @@ We are still to complete the mockup for the robot and complete the chassis for t
 
 
 ### Weekly Progress Checklist
-* Each member completed their valid tasks
-* New goal for each member
-* Next week finalised
-* Review completed
-* Meetings finalised
-* Updated GitHub
-    * Code/pictures etc. committed
-* Extra tasks discussed
+* [ALL] Each member completed their valid tasks
+* [ALL] New goal for each member
+* [Luke] Next week finalised
+* [Luke] Review completed
+* [Luke] Meetings finalised
+* [Luke] Updated GitHub
+    * [ALL] Code/pictures etc. committed
+* [ALL] Extra tasks discussed
 
 [pic]: https://m.popkey.co/fe3716/AlpAp_s-200x150.gif "We have the high ground"
