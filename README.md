@@ -2,11 +2,11 @@
 ![alt text][pic]
 
 ## Team Members
-* Xavier - Software - Xavier.Broadhead@gmail.com
-* Luke - Admin - luke.honiss@gmail.com
 * Tom - Head of Software - tom.buurmans@gmail.com
-* Raven - Head of Hardware - Ravengotztier@icloud.com
 * Isacc - Software - isaachamiltonj@gmail.com
+* Xavier - Software - Xavier.Broadhead@gmail.com
+* Raven - Head of Hardware - Ravengotztier@icloud.com
+* Luke - Admin - luke.honiss@gmail.com
 
 
 ## Information
@@ -25,6 +25,8 @@
 int main() {
     if(true) {
         print("true");
+    } else {
+        print("false");
     }
     
     return 0;
@@ -35,12 +37,12 @@ int main() {
 ## Project Plan
 | Week | Dates | Objective | Items Due | Conflicts | Tasks |
 | ---- | ----- | --------- | --------- | --------- | ----- |
-| 1    | 1-5/5 | Robot Moving | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-1) |
-| 2    | 8-12/5 | Chasis Complete | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-2) |
-| 3    | 15-19/5 | Base Code | | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-3) |
-| 4    | 22-26/5 | Quad1 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-4) |
-| 5    | 29/5-2/6 | Quad2&3 Complete | | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-5) |
-| 6    | 5-9/6 | Quad4 Complete | | ENGR101 Test | [W6 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#Week-6) |
+| 1    | 1-5/5 | Robot Moving<br />Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-1) |
+| 2    | 8-12/5 | Chassis Complete<br />Base Code | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#2eek-2) |
+| 3    | 15-19/5 | Quad1 Complete | | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#2eek-3) |
+| 4    | 22-26/5 | Quad2 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-4) |
+| 5    | 29/5-2/6 | Quad3 Complete | | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-5) |
+| 6    | 5-9/6 | Quad4 Complete | | ENGR101 Test | [W6 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-6) |
 
 ## Weekly Checklists
 ### Week 1
@@ -57,16 +59,20 @@ We are still to complete the mockup for the robot and complete the chassis for t
 
 ### Week 2
 - [ ] Ideal robot mockup
-- [ ] Mounting for camera and IR and motors
+- [ ] Mounting for camera, IR, and motors
 - [ ] Wheel guiding system
 - [ ] Finish chassis
+- [ ] Code for forward, reverse, left, right, etc.
+- [ ] Test code
 
 #### Review
 
 
 ### Week 3
 **WIP**
-- [ ] Code for forward, reverse, left, and right
+- [ ] Camera code
+- [ ] WiFi gate works
+- [ ] Robot can follow line
 - [ ] Test code
 
 #### Review
@@ -74,21 +80,18 @@ We are still to complete the mockup for the robot and complete the chassis for t
 
 ### Week 4
 **WIP**
-- [ ]
 
 #### Review
 
 
 ### Week 5
 **WIP**
-- [ ] 
 
 #### Review
 
 
 ### Week 6
 **WIP**
-- [ ] 
 
 #### Review
 
