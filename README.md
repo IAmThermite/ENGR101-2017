@@ -37,12 +37,12 @@ int main() {
 ## Project Plan
 | Week | Dates | Objective | Items Due | Conflicts | Tasks |
 | ---- | ----- | --------- | --------- | --------- | ----- |
-| 1    | 1-5/5 | Robot Moving<br />Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-1) |
-| 2    | 8-12/5 | Chassis Complete<br />Base Code | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#2eek-2) |
-| 3    | 15-19/5 | Quad1 Complete | | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#2eek-3) |
-| 4    | 22-26/5 | Quad2 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-4) |
-| 5    | 29/5-2/6 | Quad3 Complete | | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-5) |
-| 6    | 5-9/6 | Quad4 Complete | | ENGR101 Test | [W6 Checklist](https://github.com/LuciusDev/ENGR101-2017/README.md#week-6) |
+| 1    | 1-5/5 | Robot Moving<br />Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-1) |
+| 2    | 8-12/5 | Chassis Complete<br />Base Code | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-2) |
+| 3    | 15-19/5 | Quad1 Complete | | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-3) |
+| 4    | 22-26/5 | Quad2 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-4) |
+| 5    | 29/5-2/6 | Quad3 Complete | | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-5) |
+| 6    | 5-9/6 | Quad4 Complete | | ENGR101 Test | [W6 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-6) |
 
 ## Weekly Checklists
 ### Week 1
