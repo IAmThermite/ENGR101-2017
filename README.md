@@ -3,7 +3,7 @@
 
 ## Team Members
 * Tom - Head of Software - tom.buurmans@gmail.com
-* Isacc - Software - isaachamiltonj@gmail.com
+* Isaac - Software - isaachamiltonj@gmail.com
 * Xavier - Software - Xavier.Broadhead@gmail.com
 * Raven - Head of Hardware - Ravengotztier@icloud.com
 * Luke - Admin - luke.honiss@gmail.com
