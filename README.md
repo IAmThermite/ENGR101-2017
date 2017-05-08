@@ -39,10 +39,10 @@ int main() {
 | ---- | ----- | --------- | --------- | --------- | ----- |
 | 1    | 1-5/5 | Robot Moving<br />Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-1) |
 | 2    | 8-12/5 | Chassis Complete<br />Base Code | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-2) |
-| 3    | 15-19/5 | Quad1 Complete | | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-3) |
-| 4    | 22-26/5 | Quad2 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-4) |
-| 5    | 29/5-2/6 | Quad3 Complete | | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-5) |
-| 6    | 5-9/6 | Quad4 Complete | | ENGR101 Test | [W6 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-6) |
+| 3    | 15-19/5 | Quad1&2 Complete | COMP102 Test | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-3) |
+| 4    | 22-26/5 |Quad3 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-4) |
+| 5    | 29/5-2/6 | Quad4 Complete | **AVC Challenge** | | [W5 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-5) |
+
 
 ## Weekly Checklists
 ### Week 1
@@ -62,17 +62,17 @@ We are still to complete the mockup for the robot and complete the chassis for t
 - [ ] [Raven] Mounting for camera, IR, and motors
 - [ ] [Raven] Wheel guiding system
 - [ ] [Raven] Finish chassis
+- [ ] [SOFTWARE] Camera code
 - [ ] [SOFTWARE] Code for forward, reverse, left, right, etc.
-- [ ] [ALL] Test code
+- [ ] [SOFTWARE] Robot can follow line
+- [ ] [SOFTWARE] WiFi gate works
+- [ ] [SOFTWARE] Test code
 
 #### Review
 
 
 ### Week 3
 **WIP**
-- [ ] [SOFTWARE] Camera code
-- [ ] [SOFTWARE] WiFi gate works
-- [ ] [SOFTWARE] Robot can follow line
 - [ ] [SOFTWARE] Test code
 - [ ] [Raven] Refine Robot Design
 
@@ -91,15 +91,10 @@ We are still to complete the mockup for the robot and complete the chassis for t
 #### Review
 
 
-### Week 6
-**WIP**
-
-#### Review
-
 
 ### Weekly Progress Checklist
-* [ALL] Each member completed their valid tasks
-* [ALL] New goal for each member
+* [ALL] Each member/team completed their valid tasks
+* [ALL] New goal for each member/team
 * [Luke] Next week finalised
 * [Luke] Review completed
 * [Luke] Meetings finalised
