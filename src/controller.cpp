@@ -1,3 +1,4 @@
+//Going off the 101 lecture from Arthur, 8/5/17
 #include <stdio.h>
 #include <time.h>
 #include "E101.h"
