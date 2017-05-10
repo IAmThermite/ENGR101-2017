@@ -65,12 +65,11 @@ We are still to complete the mockup for the robot and complete the chassis for t
 
 
 ### Week 2
-- [ ] [Raven] Ideal robot mockup
+- [x] [Raven] Ideal robot mockup
 - [ ] [Raven] Mounting for camera, IR, and motors
-- [ ] [Raven] Wheel guiding system
+- [x] [Raven] Wheel guiding system
 - [ ] [Raven] Finish chassis
-- [ ] [SOFTWARE] Camera code
-- [ ] [SOFTWARE] Code for forward, reverse, left, right, etc.
+- [x] [SOFTWARE] Camera code
 - [ ] [SOFTWARE] Robot can follow line
 - [ ] [SOFTWARE] WiFi gate works
 - [ ] [SOFTWARE] Test code
@@ -110,5 +109,4 @@ We are still to complete the mockup for the robot and complete the chassis for t
 * [ALL] Extra tasks discussed
 
 [pic]: https://m.popkey.co/fe3716/AlpAp_s-200x150.gif "We have the high ground"
-
 [r1]: images/Robot1.jpg "Robot 1"

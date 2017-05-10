@@ -16,15 +16,31 @@ extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
 extern "C" int send_to_server(char message[24]);
 extern "C" int receive_from_server(char message[24]);
+extern "C" int read_analog(int ch_adc); 
 
 int quadrant = 1; //stores the number of the current quadrant
 
 
+<<<<<<< HEAD
+void gate_loop(){
+	int forward_distance = read_analog(front_ir_port);
+	while (forward_distance < 400) {
+		move(10);
+		forward_distance = read_analog(front_ir_port);
+	}
+	open_gate();
+	
+}
+
+int wherewhiteline(){
+	//Find out where the white line is
+=======
 /**
  * will use the camera to try and find the line
  * will call the move method
  */ 
 void find_line(){
+>>>>>>> origin/master
 	take_picture();
 	char pix[320];
 	
