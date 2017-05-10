@@ -1,14 +1,14 @@
 //Going off the 101 lecture from Arthur, 8/5/17
-//10.140.30.163 is our ip
+//10.140.30.163 is our ip of our pi
 
 #include <stdio.h>
 #include <time.h>
 #include "E101.h"
 
 #define THRESHOLD = 80;
-#define IP = ""; //stores the IP of the server
-#define PASSWORD = "12345";
 #define GATE_DIST = 0;
+const char *IP = "192.168.0.0"; //stores the IP of the server
+const char *PASSWORD = "123456"; //password for the
 
 extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
@@ -17,23 +17,10 @@ extern "C" int receive_from_server(char message[24]);
 
 int quadrant = 1; //stores the number of the current quadrant
 
-int main(){
-	printf("My process ID : %d\n", getpid()); //for if we need to stop the process
-	
-    init();
-    sleep1(0, 1000); //sleep a bit
-    
-    while(true) {
-		if(quadrant == 1) { //do quadrant 1
-			quadrant1();
-		}
-	}
-    	
-    return 0;
-}
 
 /**
- * will calculate the error
+ * will use the camera to try and find the line
+ * will call the move method
  */ 
 void find_line(){
 	take_picture();
@@ -64,6 +51,10 @@ void find_line(){
 	}
 }
 
+/**
+ * moves the robot depending on the distance
+ * from the line
+ */
 void move(int err){
 	//Move towards the white line
 	int speedLeft;
@@ -79,17 +70,31 @@ void move(int err){
 	sleep1(0, 100000);
 }
 
-void open_gate(char[24] password) {
+/**
+ * Returns true if the gate has been opened
+ */
+bool open_gate() {
 	connect_to_server("192.168.1.2", 1024);
-	send_to_server(password);
+	send_to_server(PASSWORD);
 	
-	char message[24];
+	char message[24]; //message from server
    	receive_from_server(message); //this may be buggy!
-   	printf("%s", message);
+   	printf("From Server: %s\n", message);
+   	
+   	if(message == "") { //we have
+		sleep1(2, 0); //make sure the gate has opened 
+		printf("GATE OPENED\n");
+		
+		return true;
+	} else {
+		printf("ERROR, GATE NOT OPEN\n");	
+		
+		return false;
+	}
 }
 
 /**
- * Moves the robot back a bit
+ * Moves the robot back a bit when we cant find the line
  */
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
@@ -99,10 +104,45 @@ void back(){
 }
 
 //MAIN QUADRANT METHODS
+
+/**
+ * The quadrant 1 code
+ */
 void quadrant1() {
 	if(distance_to_gate() < GATE_DIST) {
-		open_gate(PASSWORD);
-	} else {
+		if(open_gate()) { //try to open the gate
+			quadrant = 2;
+		}
+    } else {
 		find_line();
 	}
+}
+
+/**
+ * The quadrant 2 code 
+ */
+ void quadrant2() {
+	 
+}
+
+/**
+ * Main method
+ */
+int main(){
+	printf("My process ID : %d\n\n", getpid()); //for if we need to stop the process
+	
+    init();
+    sleep1(0, 1000); //sleep a bit
+    
+    while(true) {
+		if(quadrant == 1) { //do quadrant 1
+			printf("	STARTING QUAD1\n");
+			quadrant1();
+		} else if(quadrant == 2) {
+			printf("	STARTING QUAD2\n");
+			quadrant2();	
+		}
+	}
+    	
+    return 0;
 }
