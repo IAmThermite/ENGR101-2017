@@ -49,7 +49,8 @@ void find_line(){
 		} else {
 			pix[i] = 0;
 		}
-		
+	}
+	for (int i=0; i<320; i++){
 		if (pix[i] == 1){
 			err = err + (i-160);
 			nwp++;
@@ -74,7 +75,7 @@ void move(int err){
 	speedLeft = 80 + (int)((double)err*sc);//+ and - might be different depending on how the motors are connected
 	speedRight = 80 - (int)((double)err*sc);
 	
-	set_motor(1, speedLeft);//might actually be right, need to test
+	set_motor(1, speedLeft);//might actually be right motor, need to test
 	set_motor(2, speedRight);
 	sleep1(0, 100000);
 }
