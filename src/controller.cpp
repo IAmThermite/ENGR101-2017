@@ -21,6 +21,16 @@ int main(){
     return 0;
 }
 
+void gate_loop(){
+	int forward_distance = read_analog(front_ir_port);
+	while (forward_distance < 400) {
+		move(10);
+		forward_distance = read_analog(front_ir_port);
+	}
+	open_gate();
+	
+}
+
 int wherewhiteline(){
 	//Find out where the white line is
 	take_picture();
