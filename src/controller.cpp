@@ -20,27 +20,20 @@ extern "C" int read_analog(int ch_adc);
 
 int quadrant = 1; //stores the number of the current quadrant
 
-
-<<<<<<< HEAD
-void gate_loop(){
+/**
+ * returns the ir reading for the distance to the gate
+ */
+int distance_to_gate(){
 	int forward_distance = read_analog(front_ir_port);
-	while (forward_distance < 400) {
-		move(10);
-		forward_distance = read_analog(front_ir_port);
-	}
-	open_gate();
-	
+	forward_distance = read_analog(front_ir_port);
+	return forward_distance;
 }
 
-int wherewhiteline(){
-	//Find out where the white line is
-=======
 /**
  * will use the camera to try and find the line
  * will call the move method
  */ 
 void find_line(){
->>>>>>> origin/master
 	take_picture();
 	char pix[320];
 	
