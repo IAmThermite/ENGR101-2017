@@ -1,8 +1,10 @@
 //Going off the 101 lecture from Arthur, 8/5/17
 //10.140.30.163 is our ip of our pi
+//left motor = 1, right motor = 2
 
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 #include "E101.h"
 
 #define THRESHOLD = 80;
@@ -14,15 +16,31 @@ extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
 extern "C" int send_to_server(char message[24]);
 extern "C" int receive_from_server(char message[24]);
+extern "C" int read_analog(int ch_adc); 
 
 int quadrant = 1; //stores the number of the current quadrant
 
 
+<<<<<<< HEAD
+void gate_loop(){
+	int forward_distance = read_analog(front_ir_port);
+	while (forward_distance < 400) {
+		move(10);
+		forward_distance = read_analog(front_ir_port);
+	}
+	open_gate();
+	
+}
+
+int wherewhiteline(){
+	//Find out where the white line is
+=======
 /**
  * will use the camera to try and find the line
  * will call the move method
  */ 
 void find_line(){
+>>>>>>> origin/master
 	take_picture();
 	char pix[320];
 	
@@ -31,7 +49,7 @@ void find_line(){
 	
 	for (int i=0; i<320; i++){
 		pix[i] = get.pixel(120, i, 3);
-		if (pix[i] > THRESHOLD){
+		if (pix[i] > THRESHOLD){ //therefore white pixel
 			pix[i] = 1;
 		} else {
 			pix[i] = 0;
@@ -66,8 +84,8 @@ void move(int err){
 	speedLeft = 80 + (int)((double)err*sc);//+ and - might be different depending on how the motors are connected
 	speedRight = 80 - (int)((double)err*sc);
 	
-	set_motor(1, speedLeft);//might actually be right motor, need to test
-	set_motor(2, speedRight);
+	set_motor(1, speedLeft); 
+	set_motor(2, speedRight * -1); //right so must move in -ve direction
 	sleep1(0, 100000);
 }
 
@@ -82,8 +100,8 @@ bool open_gate() {
    	receive_from_server(message); //this may be buggy!
    	printf("From Server: %s\n", message);
    	
-   	if(message == "") { //we have
-		sleep1(2, 0); //make sure the gate has opened 
+   	if(message == "") { //we have opened the gate
+		sleep1(2, 0); //make sure the gate has opened fully
 		printf("GATE OPENED\n");
 		
 		return true;
@@ -99,9 +117,9 @@ bool open_gate() {
  */
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
-	set_motor(1, 128);
-	set_motor(2, -128);
-	sleep1(0, 500000);
+	set_motor(1, -50); //back so -ve left motor
+	set_motor(2, 50);
+	sleep1(0, 200000); //0.2 sec
 }
 
 //MAIN QUADRANT METHODS
