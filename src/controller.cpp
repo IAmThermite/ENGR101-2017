@@ -5,7 +5,7 @@
 #include <time.h>
 #include "E101.h"
 
-#define THRESHOLD = 127;
+#define THRESHOLD = 80;
 
 extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
@@ -41,7 +41,7 @@ int wherewhiteline(){
 		}
 		if (nwp != 0){
 			err = err/nwp;
-			move();
+			move(err);
 		}
 		else {
 			back();
@@ -50,9 +50,16 @@ int wherewhiteline(){
 	}
 }
 
-void move(){
+void move(int err){
 	//Move towards the white line
-	
+	int speedLeft;
+	int speedRight;
+	double sc;//scale
+	sc = 1;//for now, havent implemented it yet
+	speedLeft = 80 + (int)((double)err*sc);//+ and - might be different depending on how the motors are connected
+	speedRight = 80 - (int)((double)err*sc);
+	set_motor(1, speedLeft);//might actually be right, need to test
+	set_motor(2, speedRight);
 }
 
 void open_gate(char[24] password) {
