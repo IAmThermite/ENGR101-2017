@@ -76,6 +76,7 @@ void move(int err){
 	
 	set_motor(1, speedLeft);//might actually be right, need to test
 	set_motor(2, speedRight);
+	sleep1(0, 100000);
 }
 
 void open_gate(char[24] password) {
