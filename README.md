@@ -13,7 +13,14 @@
 * [Google Docs Link](https://docs.google.com/document/d/1r9uR-22ZHVupD0Ts2tCpkkdqB7kD9Vjael_ExiJzlJU/edit?usp=sharing)
     * This will be a general place for team members to put code snippets or paste pictures of progress and more general items that don't belong directly on this document.
 * We are using a Facebook Group chat to communicate
-
+<table>
+   <th colspan="3">First robot design</th>
+   <tr>
+      <td><img src="images/Robot1.jpg" alt="Robot 1" width="200px" /></td>
+      <td><img src="images/Robot2.jpg" alt="Robot 2" width="200px" /></td>
+      <td><img src="images/Robot3.jpg" alt="Robot 3" width="200px" /></td>
+   </tr>
+</table>
 
 ## Coding Guidelines
 * 4 spaces in place of a tab (can be configured through Geany)
@@ -103,3 +110,5 @@ We are still to complete the mockup for the robot and complete the chassis for t
 * [ALL] Extra tasks discussed
 
 [pic]: https://m.popkey.co/fe3716/AlpAp_s-200x150.gif "We have the high ground"
+
+[r1]: images/Robot1.jpg "Robot 1"
