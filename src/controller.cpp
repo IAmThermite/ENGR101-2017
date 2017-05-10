@@ -5,7 +5,14 @@
 
 #define THRESHOLD = 127;
 
+extern "C" int init(int d_lev);
+extern "C" int connect_to_server( char server_addr[15],int port);
+extern "C" int send_to_server(char message[24]);
+extern "C" int receive_from_server(char message[24]);
+
 int main(){
+	printf("My process ID : %d\n", getpid()); //for if we need to stop the process
+	
     init();
     sleep1(0, 1000);
     wherewhiteline();
@@ -46,7 +53,18 @@ void move(){
 	
 }
 
+void open_gate(char[24] password) {
+	connect_to_server("192.168.1.2", 1024);
+	send_to_server(password);
+	
+	char message[24];
+   	receive_from_server(message); //this may be buggy!
+   	printf("%s", message);
+}
+
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
-	
+	set_motor(1, 128);
+	set_motor(2, -128);
+	sleep1(0, 500000);
 }
