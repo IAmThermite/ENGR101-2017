@@ -7,11 +7,13 @@
 #include <unistd.h>
 #include "E101.h"
 
+//constants
 #define THRESHOLD = 80;
 #define GATE_DIST = 0;
 const char *IP = "192.168.0.0"; //stores the IP of the server
 const char *PASSWORD = "123456"; //password for the
 
+//things for networking
 extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
 extern "C" int send_to_server(char message[24]);
@@ -24,9 +26,9 @@ int quadrant = 1; //stores the number of the current quadrant
  * returns the ir reading for the distance to the gate
  */
 int distance_to_gate(){
-	int forward_distance = read_analog(front_ir_port);
-	forward_distance = read_analog(front_ir_port);
-	return forward_distance;
+	int distance;
+	distance = read_analog(0); //ir is at A0
+	return distance;
 }
 
 /**
@@ -41,7 +43,7 @@ void find_line(){
 	int nwp = 0;//Number of white pixels
 	
 	for (int i=0; i<320; i++){
-		pix[i] = get.pixel(120, i, 3);
+		pix[i] = get_pixel(120, i, 3);
 		if (pix[i] > THRESHOLD){ //therefore white pixel
 			pix[i] = 1;
 		} else {
@@ -106,6 +108,30 @@ bool open_gate() {
 }
 
 /**
+ * Checks to see if the line is completely white
+ * in which case we are in quad3
+ */
+ bool is_full_white_line() {
+    take_picture();
+	char pix[320];
+	int nwp = 0; //Number of white pixels
+	
+	for (int i=0; i<320; i++){
+		pix[i] = get_pixel(120, i, 3);
+		if (pix[i] > THRESHOLD){ //therefore white pixel
+			nwp++;
+		}
+	}
+    
+    if(nwp > 270) { //may need to change this value
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+
+/**
  * Moves the robot back a bit when we cant find the line
  */
 void back(){
@@ -114,6 +140,7 @@ void back(){
 	set_motor(2, 50);
 	sleep1(0, 200000); //0.2 sec
 }
+
 
 //MAIN QUADRANT METHODS
 
@@ -134,7 +161,7 @@ void quadrant1() {
  * The quadrant 2 code 
  */
  void quadrant2() {
-	 
+	 find_line();
 }
 
 /**
@@ -155,6 +182,6 @@ int main(){
 			quadrant2();	
 		}
 	}
-    	
+    
     return 0;
 }
