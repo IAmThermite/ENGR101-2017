@@ -75,12 +75,15 @@ We are still to complete the mockup for the robot and complete the chassis for t
 - [ ] [SOFTWARE] Test code
 
 #### Review
-
+We have done a lot of work this week. We managed to make a basic robot chasis with the parts that we could get. We have not yet finished the chasis but are not too far off it. Our hardware team will be completing the chasis at home. The software is pretty much complete for quadrant 1 which is very helpful. All of the team except Luke will be comming back on friday to complete the chasis and tidy stuff up.
 
 ### Week 3
-**WIP**
+- [ ] [HARDWARE] Finish chassis
 - [ ] [SOFTWARE] Test code
-- [ ] [Raven] Refine Robot Design
+- [ ] [HARDWARE] Mounting for camera, IR, and motors
+- [ ] [SOFTWARE] Robot can follow line
+- [ ] [SOFTWARE] WiFi gate works
+- [ ] [HARDWARE] Refine Robot Design
 
 #### Review
 
