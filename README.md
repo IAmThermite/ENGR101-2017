@@ -3,7 +3,7 @@
 
 ## Team Members
 * Tom - Head of Software - tom.buurmans@gmail.com
-* Isaac - Software - isaachamiltonj@gmail.com
+* Isaac - Hardware - isaachamiltonj@gmail.com
 * Xavier - Software - Xavier.Broadhead@gmail.com
 * Raven - Head of Hardware - Ravengotztier@icloud.com
 * Luke - Admin - luke.honiss@gmail.com
@@ -78,24 +78,30 @@ We are still to complete the mockup for the robot and complete the chassis for t
 We have done a lot of work this week. We managed to make a basic robot chasis with the parts that we could get. We have not yet finished the chasis but are not too far off it. Our hardware team will be completing the chasis at home. The software is pretty much complete for quadrant 1 which is very helpful. All of the team except Luke will be comming back on friday to complete the chasis and tidy stuff up.
 
 ### Week 3
+- [ ] [HARDWARE] Complete CAD files
+- [ ] [HARDWARE] 3d print parts
 - [ ] [HARDWARE] Finish chassis
 - [ ] [SOFTWARE] Test code
-- [ ] [HARDWARE] Mounting for camera, IR, and motors
+- [ ] [HARDWARE] Mount camera, IR, and motors
 - [ ] [SOFTWARE] Robot can follow line
 - [ ] [SOFTWARE] WiFi gate works
+- [ ] [SOFTWARE] Implement derivitive signal
+- [ ] [SOFTWARE] Refine constants
 - [ ] [HARDWARE] Refine Robot Design
+- [ ] [ALL] Quad 1&2 complete
 
 #### Review
 
 
 ### Week 4
-**WIP**
+- [ ] [ALL] Quad 3 complete
 
 #### Review
 
 
 ### Week 5
-**WIP**
+- [ ] [SOFTWARE] Quad 4 complete
+- [ ] [ALL] Finishing touches
 
 #### Review
 
@@ -112,4 +118,3 @@ We have done a lot of work this week. We managed to make a basic robot chasis wi
 * [ALL] Extra tasks discussed
 
 [pic]: https://m.popkey.co/fe3716/AlpAp_s-200x150.gif "We have the high ground"
-[r1]: images/Robot1.jpg "Robot 1"
