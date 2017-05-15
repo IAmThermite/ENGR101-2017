@@ -8,22 +8,28 @@
 #include "E101.h"
 
 //constants
-#define THRESHOLD = 80;
-#define GATE_DIST = 0;
-#define WALL_DIST = 0;
-const char *IP = "192.168.0.0"; //stores the IP of the server
+const int THRESHOLD = 80;
+const int GATE_DIST = 0;
+const int WALL_DIST = 0;
+
+const char *IP = "130.195.6.196"; //stores the IP of the server
+const int PORT = 1024;
 const char *PASSWORD = "123456"; //password for the gate
 
+const double SC_1 = 0.5; //error scale
+const double SC_2 = 0.05; //derivitive scale
+
 //things for networking
+/*
 extern "C" int init(int d_lev);
 extern "C" int connect_to_server( char server_addr[15],int port);
 extern "C" int send_to_server(char message[24]);
 extern "C" int receive_from_server(char message[24]);
 extern "C" int read_analog(int ch_adc); 
+*/
 
 int quadrant = 1; //stores the number of the current quadrant
 
-int prev_err = 0; //stores previous error signal
 int delta_err = 0; //the change in the error signal (err-prev_err)
 
 /**
@@ -40,37 +46,45 @@ int distance_to_wall() {
  * will call the move method
  */
 void find_line() {
-	take_picture();
-	char pix[320];
+	char pix1[320]; //first row of pixels
+    char pix2[320]; //second row of pixels
     
-    int err = 0; //error signal
+    int err1 = 0; //error signal for first row
+    int err2 = 0; //error signal for second row
 	int nwp = 0;//Number of white pixels
 	
-	for (int i=0; i<320; i++){
-		pix[i] = get_pixel(120, i, 3);
+	take_picture();
+	for (int i=0; i<320; i++) {
+        //first row of pixels
+		pix1[i] = get_pixel(120, i, 3);
 	
-    	if (pix[i] > THRESHOLD){ //therefore white pixel
-			pix[i] = 1;
-		} else {
-			pix[i] = 0;
-		}
-	}
-	
-    for (int i=0; i<320; i++){
-		if (pix[i] == 1){
-			err = err + (i-160);
+    	if (pix1[i] > THRESHOLD){ //therefore white pixel
+			pix1[i] = 1;
+            err1 = err1 + (i-160);
 			nwp++;
-		}
-		
-		if (nwp != 0){
-			err = err/nwp;
-			move(err);
 		} else {
-			back(); //no white pixels found, we have lost the line
+			pix1[i] = 0;
+		}
+        
+        //second row of pixels
+        pix2[i] = get_pixel(20, i, 3);
+	
+    	if (pix2[i] > THRESHOLD){ //therefore white pixel
+			pix2[i] = 1;
+            err2 = err2 + (i-160);
+		} else {
+			pix1[i] = 0;
 		}
 	}
     
-    prev_err = err;
+    if (nwp != 0) { //if no white pixels
+		err = err/nwp;
+		move(err);
+	} else {
+		back(); //no white pixels found, we have lost the line
+	}
+    
+    delta_err = err1 - err2;
 }
 
 /**
@@ -78,18 +92,16 @@ void find_line() {
  * from the line
  */
 void move(int err){
-    delta_err = err-prev_err;
     
 	//Move towards the white line
 	int speed_left;
 	int speed_right;
-	double sc = 1; //scaling factor
 	
-	speedLeft = 80 + (int)((double)err*sc) + (int)((double)prev_err*sc2);
-	speedRight = 80 - (int)((double)err*sc) - (int)((double)prev_err*sc2);
+	speedLeft = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speedRight = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
 	
-	set_motor(1, speed_left); 
-	set_motor(2, speed_right * -1); //right so must move in -ve direction
+	set_motor(1, speed_left * -1); //left so must move in -ve direction 
+	set_motor(2, speed_right); 
 	sleep1(0, 50000); //50ms
 }
 
@@ -98,11 +110,13 @@ void move(int err){
  */
 bool open_gate() {
 	connect_to_server("192.168.1.2", 1024);
-	send_to_server(PASSWORD);
+	send_to_server(PASSWORD); //send a random string to server
 	
 	char message[24]; //message from server
    	receive_from_server(message); //this may be buggy!
    	printf("From Server: %s\n", message);
+    
+    send_to_server(message + "Please");
    	
    	if(message == "") { //we have opened the gate
 		sleep1(2, 0); //make sure the gate has opened fully
