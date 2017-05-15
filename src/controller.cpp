@@ -41,7 +41,7 @@ int distance_to_wall() {
  */
 void find_line() {
 	take_picture();
-	char pix1[320];
+	char pix[320];
     
     int err = 0; //error signal
 	int nwp = 0;//Number of white pixels
