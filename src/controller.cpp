@@ -10,8 +10,9 @@
 //constants
 #define THRESHOLD = 80;
 #define GATE_DIST = 0;
+#define WALL_DIST = 0;
 const char *IP = "192.168.0.0"; //stores the IP of the server
-const char *PASSWORD = "123456"; //password for the
+const char *PASSWORD = "123456"; //password for the gate
 
 //things for networking
 extern "C" int init(int d_lev);
@@ -22,10 +23,13 @@ extern "C" int read_analog(int ch_adc);
 
 int quadrant = 1; //stores the number of the current quadrant
 
+int prev_err = 0; //stores previous error signal
+int delta_err = 0; //the change in the error signal (err-prev_err)
+
 /**
  * returns the ir reading for the distance to the gate
  */
-int distance_to_gate(){
+int distance_to_wall() {
 	int distance;
 	distance = read_analog(0); //ir is at A0
 	return distance;
@@ -34,23 +38,25 @@ int distance_to_gate(){
 /**
  * will use the camera to try and find the line
  * will call the move method
- */ 
-void find_line(){
+ */
+void find_line() {
 	take_picture();
-	char pix[320];
-	
-	int err = 0;
+	char pix1[320];
+    
+    int err = 0; //error signal
 	int nwp = 0;//Number of white pixels
 	
 	for (int i=0; i<320; i++){
 		pix[i] = get_pixel(120, i, 3);
-		if (pix[i] > THRESHOLD){ //therefore white pixel
+	
+    	if (pix[i] > THRESHOLD){ //therefore white pixel
 			pix[i] = 1;
 		} else {
 			pix[i] = 0;
 		}
 	}
-	for (int i=0; i<320; i++){
+	
+    for (int i=0; i<320; i++){
 		if (pix[i] == 1){
 			err = err + (i-160);
 			nwp++;
@@ -60,9 +66,11 @@ void find_line(){
 			err = err/nwp;
 			move(err);
 		} else {
-			back();
+			back(); //no white pixels found, we have lost the line
 		}
 	}
+    
+    prev_err = err;
 }
 
 /**
@@ -70,18 +78,19 @@ void find_line(){
  * from the line
  */
 void move(int err){
+    delta_err = err-prev_err;
+    
 	//Move towards the white line
-	int speedLeft;
-	int speedRight;
-	double sc; //scale
-	sc = 1; //for now, havent implemented it yet
+	int speed_left;
+	int speed_right;
+	double sc = 1; //scaling factor
 	
-	speedLeft = 80 + (int)((double)err*sc);//+ and - might be different depending on how the motors are connected
-	speedRight = 80 - (int)((double)err*sc);
+	speedLeft = 80 + (int)((double)err*sc) + (int)((double)prev_err*sc2);
+	speedRight = 80 - (int)((double)err*sc) - (int)((double)prev_err*sc2);
 	
-	set_motor(1, speedLeft); 
-	set_motor(2, speedRight * -1); //right so must move in -ve direction
-	sleep1(0, 100000);
+	set_motor(1, speed_left); 
+	set_motor(2, speed_right * -1); //right so must move in -ve direction
+	sleep1(0, 50000); //50ms
 }
 
 /**
@@ -148,7 +157,7 @@ void back(){
  * The quadrant 1 code
  */
 void quadrant1() {
-	if(distance_to_gate() < GATE_DIST) {
+	if(distance_to_wall() < GATE_DIST) {
 		if(open_gate()) { //try to open the gate
 			quadrant = 2;
 		}
