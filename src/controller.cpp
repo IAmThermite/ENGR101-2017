@@ -14,7 +14,7 @@ const int WALL_DIST = 0;
 
 const char IP[] = "130.195.6.196"; //stores the IP of the server
 const int PORT = 1024;
-const char PASSWORD[] = "123456"; //password for the gate
+const char PASSWORD[] = "1234567890"; //password for the gate (can be anything)
 
 const double SC_1 = 0.5; //error scale
 const double SC_2 = 0.05; //derivitive scale
@@ -93,7 +93,7 @@ void find_line() {
     
     int err1 = 0; //error signal for first row
     int err2 = 0; //error signal for second row
-	int nwp = 0;//Number of white pixels
+	int nwp = 0; //Number of white pixels
 	
 	take_picture();
 	for (int i=0; i<320; i++) {
@@ -141,7 +141,7 @@ void find_line() {
  * find line for the maze
  */
 void find_line_maze() {
-     
+    
 }
 
 /**
@@ -208,29 +208,37 @@ void back(){
 }
 
 
+//
 //MAIN QUADRANT METHODS
+//
 
 /**
  * The quadrant 1 code
  */
 void quadrant1() {
-	if(distance_to_wall() < GATE_DIST) {
-		if(open_gate()) { //try to open the gate
-			quadrant = 2;
-		}
-    } else {
-		find_line();
-	}
+    while(true) {
+        if(distance_to_wall() < GATE_DIST) {
+            if(open_gate()) { //try to open the gate
+                quadrant = 2;
+                break;
+            }
+        } else {
+            find_line();
+        }
+    }
 }
 
 /**
  * The quadrant 2 code 
  */
  void quadrant2() {
-	 if(!is_full_white_line()) {
-         find_line();
-    } else {
-        quadrant = 3;
+     while(true) {
+         if(!is_full_white_line()) {
+             find_line();
+        } else {
+            quadrant = 3;
+            break;
+        }
     }
 }
 
@@ -238,11 +246,23 @@ void quadrant1() {
  * The quadrant 3 code
  */
  void quadrant3() {
-    if(!is_full_red_line()) {
-        find_line_maze();
-    } else {
-        quadrant = 4;
+    while(true) {
+        if(!is_full_red_line()) {
+            find_line_maze();
+        } else {
+            quadrant = 4;
+            break;
+        }
     }
+}
+
+/**
+ * The quadrant 4 code
+ */
+void quadrant4() {
+    while(true) {
+        
+    }    
 }
 
 /**
