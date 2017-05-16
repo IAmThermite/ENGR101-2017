@@ -12,9 +12,9 @@ const int THRESHOLD = 80;
 const int GATE_DIST = 0;
 const int WALL_DIST = 0;
 
-const char *IP = "130.195.6.196"; //stores the IP of the server
+const char IP[] = "130.195.6.196"; //stores the IP of the server
 const int PORT = 1024;
-const char *PASSWORD = "123456"; //password for the gate
+const char PASSWORD[] = "123456"; //password for the gate
 
 const double SC_1 = 0.5; //error scale
 const double SC_2 = 0.05; //derivitive scale
@@ -32,6 +32,10 @@ int quadrant = 1; //stores the number of the current quadrant
 
 int delta_err = 0; //the change in the error signal (err-prev_err)
 
+//stores the pixels in the images
+char pix1[320]; //first row of pixels
+char pix2[320]; //second row of pixels
+
 /**
  * returns the ir reading for the distance to the gate
  */
@@ -42,12 +46,50 @@ int distance_to_wall() {
 }
 
 /**
+ * Checks to see if the line is completely white
+ * in which case we are in quad3
+ */
+ bool is_full_white_line() {
+	int nwp = 0; //Number of white pixels
+	
+	for (int i=0; i<320; i++){
+		if (pix1[i] == 1){ //therefore white pixel
+			nwp++;
+		}
+	}
+    
+    if(nwp > 270) { //may need to change this value
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+
+/**
+ * Checks to see if the line is completely red
+ */
+ bool is_full_red_line() {
+    int nrp = 0; //Number of red pixels
+	
+	for (int i=0; i<320; i++){
+		if (pix_r[i] == 1){ //therefore red pixel
+			nrp++;
+		}
+	}
+    
+    if(nrp > 270) { //may need to change this value
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
  * will use the camera to try and find the line
  * will call the move method
  */
 void find_line() {
-	char pix1[320]; //first row of pixels
-    char pix2[320]; //second row of pixels
     
     int err1 = 0; //error signal for first row
     int err2 = 0; //error signal for second row
@@ -75,11 +117,19 @@ void find_line() {
 		} else {
 			pix1[i] = 0;
 		}
+        
+        pix_r[i] = get_pixel(120, i, 0); //get red chanel
+        
+        if(pix_r[i] > THRESHOLD) {
+            pix_r[i] = 1;
+        } else {
+            pix_r[i] = 0;
+        }
 	}
     
     if (nwp != 0) { //if no white pixels
-		err = err/nwp;
-		move(err);
+		err1 = err1/nwp;
+		move(err1);
 	} else {
 		back(); //no white pixels found, we have lost the line
 	}
@@ -88,11 +138,20 @@ void find_line() {
 }
 
 /**
+ * find line for the maze
+ */
+void find_line_maze() {
+     
+}
+
+/**
+ * 
+
+/**
  * moves the robot depending on the distance
  * from the line
  */
 void move(int err){
-    
 	//Move towards the white line
 	int speed_left;
 	int speed_right;
@@ -106,10 +165,18 @@ void move(int err){
 }
 
 /**
+ * move depending on distance to wall
+ */
+void move() {
+    int speed_left;
+	int speed_right;
+}
+
+/**
  * Returns true if the gate has been opened
  */
 bool open_gate() {
-	connect_to_server("192.168.1.2", 1024);
+	connect_to_server(IP, 1024);
 	send_to_server(PASSWORD); //send a random string to server
 	
 	char message[24]; //message from server
@@ -128,30 +195,6 @@ bool open_gate() {
 		
 		return false;
 	}
-}
-
-/**
- * Checks to see if the line is completely white
- * in which case we are in quad3
- */
- bool is_full_white_line() {
-    take_picture();
-	char pix[320];
-	int nwp = 0; //Number of white pixels
-	
-	for (int i=0; i<320; i++){
-		pix[i] = get_pixel(120, i, 3);
-		if (pix[i] > THRESHOLD){ //therefore white pixel
-			nwp++;
-		}
-	}
-    
-    if(nwp > 270) { //may need to change this value
-        return true;
-    } else {
-        return false;
-    }
-    
 }
 
 /**
@@ -184,7 +227,22 @@ void quadrant1() {
  * The quadrant 2 code 
  */
  void quadrant2() {
-	 find_line();
+	 if(!is_full_white_line()) {
+         find_line();
+    } else {
+        quadrant = 3;
+    }
+}
+
+/**
+ * The quadrant 3 code
+ */
+ void quadrant3() {
+    if(!is_full_red_line()) {
+        find_line_maze();
+    } else {
+        quadrant = 4;
+    }
 }
 
 /**
@@ -197,13 +255,16 @@ int main(){
     sleep1(0, 1000); //sleep a bit
     
     while(true) {
-		if(quadrant == 1) { //do quadrant 1
-			printf("	STARTING QUAD1\n");
+		if(quadrant == 1) {
+			printf("	## STARTING QUAD1\n");
 			quadrant1();
 		} else if(quadrant == 2) {
-			printf("	STARTING QUAD2\n");
+			printf("	## STARTING QUAD2\n");
 			quadrant2();	
-		}
+		} else if(quadrant == 3) {
+            printf("    ## STARTING QUAD2\n");
+            quadrant3();   
+        }
 	}
     
     return 0;
