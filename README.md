@@ -20,6 +20,10 @@
       <td><img src="images/Robot2.jpg" alt="Robot 2" width="200px" /></td>
       <td><img src="images/Robot3.jpg" alt="Robot 3" width="200px" /></td>
    </tr>
+   <th colspan="3">Final robot designs</th>
+   <tr>
+      <td><img src="images/robot-battery.jpg" alt="Complete robot without battery" width="200px" /></td>
+   </tr>
 </table>
 
 ## Coding Guidelines
@@ -44,7 +48,7 @@ int main() {
 ## Project Plan
 | Week | Dates | Objective | Items Due | Conflicts | Tasks |
 | ---- | ----- | --------- | --------- | --------- | ----- |
-| 1    | 1-5/5 | Robot Moving<br />Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-1) |
+| 1    | 1-5/5 | Robot Moving<br/>Chassis Design | AVC Plan | | [W1 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-1) |
 | 2    | 8-12/5 | Chassis Complete<br />Base Code | | | [W2 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-2) |
 | 3    | 15-19/5 | Quad1&2 Complete | COMP102 Test | | [W3 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-3) |
 | 4    | 22-26/5 |Quad3 Complete | AVC Progress | ENGR121 Test | [W4 Checklist](https://github.com/LuciusDev/ENGR101-2017/blob/master/README.md#week-4) |
@@ -79,10 +83,10 @@ We have done a lot of work this week. We managed to make a basic robot chasis wi
 
 ### Week 3
 - [x] [HARDWARE] Complete CAD files
-- [ ] [HARDWARE] 3d print parts
-- [ ] [HARDWARE] Finish chassis
+- [x] [HARDWARE] 3d print parts
+- [x] [HARDWARE] Finish chassis
 - [ ] [SOFTWARE] Test code
-- [ ] [HARDWARE] Mount camera, IR, and motors
+- [x] [HARDWARE] Mount camera, IR, and motors
 - [ ] [SOFTWARE] Robot can follow line
 - [ ] [SOFTWARE] WiFi gate works
 - [x] [SOFTWARE] Implement derivitive signal
@@ -91,10 +95,15 @@ We have done a lot of work this week. We managed to make a basic robot chasis wi
 - [ ] [ALL] Quad 1&2 complete
 
 #### Review
-
+Unfortunately we were unable to get to use the 3D printers on Tuesday. We completed most of the CAD files there and made a few adjustments later in our own time. On Thursday we managed to get all our important parts printed and mounted. If we get the oppurtunity on Friday we may come back and try to do some testing.
 
 ### Week 4
-- [ ] [ALL] Quad 3 complete
+- [ ] [ALL] Quad 1&2&3 complete
+- [ ] [SOFTWARE] Test code
+- [ ] [SOFTWARE] Robot can follow line
+- [ ] [SOFTWARE] WiFi gate works
+- [ ] [SOFTWARE] Refine constants
+- [ ] [HARDWARE] Refine Robot Design
 
 #### Review
 
@@ -102,6 +111,7 @@ We have done a lot of work this week. We managed to make a basic robot chasis wi
 ### Week 5
 - [ ] [ALL] Quad 4 complete
 - [ ] [ALL] Finishing touches
+- [ ] AVC CHALLENGE COMPLETED!
 
 #### Review
 
