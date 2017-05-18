@@ -175,8 +175,8 @@ void move() {
 /**
  * Returns true if the gate has been opened
  */
-bool open_gate() {
-	connect_to_server(IP, 1024);
+void open_gate() {
+	connect_to_server(IP, PORT);
 	send_to_server(PASSWORD); //send a random string to server
 	
 	char message[24]; //message from server
@@ -184,17 +184,6 @@ bool open_gate() {
    	printf("From Server: %s\n", message);
     
     send_to_server(message + "Please");
-   	
-   	if(message == "") { //we have opened the gate
-		sleep1(2, 0); //make sure the gate has opened fully
-		printf("GATE OPENED\n");
-		
-		return true;
-	} else {
-		printf("ERROR, GATE NOT OPEN\n");	
-		
-		return false;
-	}
 }
 
 /**
@@ -218,10 +207,10 @@ void back(){
 void quadrant1() {
     while(true) {
         if(distance_to_wall() < GATE_DIST) {
-            if(open_gate()) { //try to open the gate
-                quadrant = 2;
-                break;
-            }
+            open_gate(); //try to open the gate
+            quadrant = 2;
+            break;
+            
         } else {
             find_line();
         }
