@@ -9,6 +9,7 @@ void main() {
     char pw[] = "123456789012345678901234";
     char ip[] = "130.195.6.196";
     char plz[] = "Please";
+    char mts[7];
     int port = 1024;
 
     connect_to_server(ip, port);
@@ -18,7 +19,12 @@ void main() {
    	receive_from_server(message); //this may be buggy!
    	printf("From Server: %s\n", message);
     
-    send_to_server(message + plz);
+    for(int i = 0; i < 6; i++) {
+        mts[i] = message[i];
+    }
+    
+    mts[6] = 0;
+    send_to_server(message);
     
     return 0;
 }
