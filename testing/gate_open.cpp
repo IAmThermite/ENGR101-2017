@@ -8,7 +8,6 @@ int main() {
     
     char pw[] = "123456789012345678901234";
     char ip[] = "130.195.6.196";
-    char plz[] = "Please";
     char mts[7];
     int port = 1024;
 
@@ -24,7 +23,8 @@ int main() {
     }
     
     mts[6] = 0;
-    send_to_server(message);
+    printf(mts);
+    send_to_server(mts);
     
     return 0;
 }
