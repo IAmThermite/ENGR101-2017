@@ -6,7 +6,7 @@ int main() {
     init();
     sleep1(0, 1000);
     
-    char pw[] = "123456789012345678901234";
+    char pw[] = "Please";
     char ip[] = "130.195.6.196";
     char mts[7];
     int port = 1024;
