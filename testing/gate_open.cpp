@@ -6,12 +6,12 @@ void main() {
     init();
     sleep1(0, 1000);
     
-    char[] pw = "123456789012345678901234";
+    char pw[] = "123456789012345678901234";
     char ip[] = "130.195.6.196";
     int port = 1024;
 
     connect_to_server(ip, port);
-	send_to_server(PASSWORD); //send a random string to server
+	send_to_server(pw); //send a random string to server
 	
 	char message[24]; //message from server
    	receive_from_server(message); //this may be buggy!

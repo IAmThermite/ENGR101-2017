@@ -47,6 +47,42 @@ int distance_to_wall() {
 	return distance;
 }
 
+
+/**
+ * moves the robot depending on the distance
+ * from the line
+ */
+void move(int err){
+	//Move towards the white line
+	int speed_left;
+	int speed_right;
+	
+	speed_left = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_right = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	
+	set_motor(1, speed_left * -1); //left so must move in -ve direction 
+	set_motor(2, speed_right); 
+	sleep1(0, 50000); //50ms
+}
+
+/**
+ * move depending on distance to wall
+ */
+void move() {
+    int speed_left;
+	int speed_right;
+}
+
+/**
+ * Moves the robot back a bit when we cant find the line
+ */
+void back(){
+	//Error correcting by moving backwards if the whiteline cannot be found until one is found
+	set_motor(1, -50); //back so -ve left motor
+	set_motor(2, 50);
+	sleep1(0, 200000); //0.2 sec
+}
+
 /**
  * Checks to see if the line is completely white
  * in which case we are in quad3
@@ -147,42 +183,7 @@ void find_line_maze() {
 }
 
 /**
- * Moves the robot back a bit when we cant find the line
- */
-void back(){
-	//Error correcting by moving backwards if the whiteline cannot be found until one is found
-	set_motor(1, -50); //back so -ve left motor
-	set_motor(2, 50);
-	sleep1(0, 200000); //0.2 sec
-}
-
-/**
- * moves the robot depending on the distance
- * from the line
- */
-void move(int err){
-	//Move towards the white line
-	int speed_left;
-	int speed_right;
-	
-	speed_left = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
-	speed_right = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-	
-	set_motor(1, speed_left * -1); //left so must move in -ve direction 
-	set_motor(2, speed_right); 
-	sleep1(0, 50000); //50ms
-}
-
-/**
- * move depending on distance to wall
- */
-void move() {
-    int speed_left;
-	int speed_right;
-}
-
-/**
- * Returns true if the gate has been opened
+ * Trys to open the gate
  */
 void open_gate() {
 	connect_to_server(IP, PORT);
