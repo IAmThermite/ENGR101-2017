@@ -1,6 +1,7 @@
 //Going off the 101 lecture from Arthur, 8/5/17
 //10.140.30.163 is our ip of our pi
 //left motor = 1, right motor = 2
+//g++ -o controler controller.cpp -I../ -le101
 
 #include <stdio.h>
 #include <time.h>
@@ -35,6 +36,7 @@ int delta_err = 0; //the change in the error signal (err-prev_err)
 //stores the pixels in the images
 char pix1[320]; //first row of pixels
 char pix2[320]; //second row of pixels
+char pix_r[320];
 
 /**
  * returns the ir reading for the distance to the gate
@@ -145,7 +147,14 @@ void find_line_maze() {
 }
 
 /**
- * 
+ * Moves the robot back a bit when we cant find the line
+ */
+void back(){
+	//Error correcting by moving backwards if the whiteline cannot be found until one is found
+	set_motor(1, -50); //back so -ve left motor
+	set_motor(2, 50);
+	sleep1(0, 200000); //0.2 sec
+}
 
 /**
  * moves the robot depending on the distance
@@ -156,8 +165,8 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 	
-	speedLeft = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
-	speedRight = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_left = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_right = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
 	
 	set_motor(1, speed_left * -1); //left so must move in -ve direction 
 	set_motor(2, speed_right); 
@@ -184,16 +193,6 @@ void open_gate() {
    	printf("From Server: %s\n", message);
     
     send_to_server(message + "Please");
-}
-
-/**
- * Moves the robot back a bit when we cant find the line
- */
-void back(){
-	//Error correcting by moving backwards if the whiteline cannot be found until one is found
-	set_motor(1, -50); //back so -ve left motor
-	set_motor(2, 50);
-	sleep1(0, 200000); //0.2 sec
 }
 
 
