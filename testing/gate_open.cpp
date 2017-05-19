@@ -2,7 +2,7 @@
 #include <time.h>
 #include "E101.h"
 
-void main() {
+int main() {
     init();
     sleep1(0, 1000);
     
