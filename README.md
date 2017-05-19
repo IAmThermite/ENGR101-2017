@@ -85,17 +85,17 @@ We have done a lot of work this week. We managed to make a basic robot chasis wi
 - [x] [HARDWARE] Complete CAD files
 - [x] [HARDWARE] 3d print parts
 - [x] [HARDWARE] Finish chassis
-- [ ] [SOFTWARE] Test code
+- [x] [SOFTWARE] Test code
 - [x] [HARDWARE] Mount camera, IR, and motors
 - [ ] [SOFTWARE] Robot can follow line
-- [ ] [SOFTWARE] WiFi gate works
+- [x] [SOFTWARE] WiFi gate works
 - [x] [SOFTWARE] Implement derivitive signal
 - [ ] [SOFTWARE] Refine constants
-- [ ] [HARDWARE] Refine Robot Design
+- [x] [HARDWARE] Refine Robot Design
 - [ ] [ALL] Quad 1&2 complete
 
 #### Review
-Unfortunately we were unable to get to use the 3D printers on Tuesday. We completed most of the CAD files there and made a few adjustments later in our own time. On Thursday we managed to get all our important parts printed and mounted. If we get the oppurtunity on Friday we may come back and try to do some testing.
+Unfortunately we were unable to get to use the 3D printers on Tuesday. We completed most of the CAD files there and made a few adjustments later in our own time. On Thursday we managed to get all our important parts printed and mounted. If we get the oppurtunity on Friday we may come back and try to do some testing. On Friday we managed to print out the final part of the chassis and test the gate opening. The gate now fully opens so it is working as expected.
 
 ### Week 4
 - [ ] [ALL] Quad 1&2&3 complete
@@ -103,7 +103,6 @@ Unfortunately we were unable to get to use the 3D printers on Tuesday. We comple
 - [ ] [SOFTWARE] Robot can follow line
 - [ ] [SOFTWARE] WiFi gate works
 - [ ] [SOFTWARE] Refine constants
-- [ ] [HARDWARE] Refine Robot Design
 
 #### Review
 
