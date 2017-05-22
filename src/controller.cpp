@@ -13,10 +13,6 @@ const int THRESHOLD = 80;
 const int GATE_DIST = 0;
 const int WALL_DIST = 0;
 
-const char IP[] = "130.195.6.196"; //stores the IP of the server
-const int PORT = 1024;
-const char PASSWORD[] = "1234567890"; //password for the gate (can be anything)
-
 const double SC_1 = 0.5; //error scale
 const double SC_2 = 0.05; //derivitive scale
 
@@ -186,14 +182,25 @@ void find_line_maze() {
  * Trys to open the gate
  */
 void open_gate() {
-	connect_to_server(IP, PORT);
-	send_to_server(PASSWORD); //send a random string to server
+	char pw[] = "Please";
+    char ip[] = "130.195.6.196";
+    char mts[7];
+    int port = 1024;
+
+    connect_to_server(ip, port);
+	send_to_server(pw); //send a random string to server
 	
 	char message[24]; //message from server
    	receive_from_server(message); //this may be buggy!
    	printf("From Server: %s\n", message);
     
-    send_to_server(message + "Please");
+    for(int i = 0; i < 6; i++) {
+        mts[i] = message[i];
+    }
+    
+    mts[6] = 0; //final digit is 0
+    printf(mts);
+    send_to_server(mts);
 }
 
 
