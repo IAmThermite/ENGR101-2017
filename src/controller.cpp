@@ -53,8 +53,8 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 	
-	speed_left = 40 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-	speed_right = 40 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_left = 40 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_right = 40 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
 	
 	set_motor(1, speed_left);  
 	set_motor(2, speed_right * -1); //right so must move in -ve direction
