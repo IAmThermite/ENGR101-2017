@@ -1,7 +1,7 @@
 //Going off the 101 lecture from Arthur, 8/5/17
 //10.140.30.163 is our ip of our pi
 //left motor = 1, right motor = 2
-//g++ -o controler controller.cpp -I../ -le101
+//g++ -o controller controller.cpp -I../ -le101
 
 #include <stdio.h>
 #include <time.h>

@@ -12,13 +12,13 @@ int main() {
     while(true) {
         take_picture();
         for(int i = 0; i<320; i++) {
-            char[i] = get_pixel(120, i, 3);
+            pix[i] = get_pixel(120, i, 3);
             
-            if(char[i] > 80) {
-                char[i] = 1;
+            if(pix[i] > 80) {
+                pix[i] = 1;
                 err = err + (i-160);
             } else {
-                char[i] = 0;
+                pix[i] = 0;
             }
         }
         
