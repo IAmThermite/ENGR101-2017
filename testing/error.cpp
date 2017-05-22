@@ -6,16 +6,14 @@
 int main() {
     init();
     
-    char pix[320];
-    
-    
-    while(true) {
+//    while(true) {
+	char pix[320];
         int err = 0;
         take_picture();
         for(int i = 0; i<320; i++) {
             pix[i] = get_pixel(120, i, 3);
             
-            if(pix[i] > 80) {
+            if(pix[i] > 100) {
                 pix[i] = 1;
                 err = err + (i-160);
             } else {
@@ -25,7 +23,7 @@ int main() {
         
         printf("%d\n", err);
         sleep1(0, 500000);
-    }
+//    }
     
     return 0;    
 }
