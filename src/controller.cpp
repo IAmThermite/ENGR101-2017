@@ -13,7 +13,7 @@ const int THRESHOLD = 80;
 const int GATE_DIST = 0;
 const int WALL_DIST = 0;
 
-const double SC_1 = 0.5; //error scale
+const double SC_1 = 0.05; //error scale
 const double SC_2 = 0.05; //derivitive scale
 
 //things for networking
@@ -53,8 +53,8 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 	
-	speed_left = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-	speed_right = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_left = 40 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_right = 40 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 	
 	set_motor(1, speed_left);  
 	set_motor(2, speed_right * -1); //right so must move in -ve direction
