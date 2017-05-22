@@ -53,11 +53,11 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 	
-	speed_left = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
-	speed_right = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_left = 80 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_right = 80 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 	
-	set_motor(1, speed_left * -1); //left so must move in -ve direction 
-	set_motor(2, speed_right); 
+	set_motor(1, speed_left);  
+	set_motor(2, speed_right * -1); //right so must move in -ve direction
 	sleep1(0, 50000); //50ms
 }
 
@@ -74,8 +74,8 @@ void move() {
  */
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
-	set_motor(1, -50); //back so -ve left motor
-	set_motor(2, 50);
+	set_motor(1, 50); 
+	set_motor(2, -50); //back so -ve right motor
 	sleep1(0, 200000); //0.2 sec
 }
 
