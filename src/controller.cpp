@@ -9,12 +9,12 @@
 #include "E101.h"
 
 //constants
-const int THRESHOLD = 80;
+const int THRESHOLD = 100;
 const int GATE_DIST = 0;
 const int WALL_DIST = 0;
 
-const double SC_1 = 0.01; //error scale
-const double SC_2 = 0.005; //derivitive scale
+const double SC_1 = 0.004; //error scale
+const double SC_2 = 0.006; //derivitive scale
 
 //things for networking
 /*
@@ -53,9 +53,10 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 	
-	speed_left = 40 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
-	speed_right = 40 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-    
+	speed_left = 35 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_right = 35 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+//    	speed_left = 35 - (int)((double)err*SC_1);
+//	speed_right = 35 + (int)((double)err*SC_1);
     if(speed_left > 250) {
         speed_left = 250;    
     } else if(speed_left < -250) {
@@ -67,8 +68,8 @@ void move(int err){
     } else if(speed_right < -250) {
         speed_right = -250;
     }
-	set_motor(1, speed_left);  
-	set_motor(2, speed_right * -1); //right so must move in -ve direction
+	set_motor(1, speed_right);  
+	set_motor(2, speed_left * -1); //right so must move in -ve direction
     
     printf("Left: %d, Right: %d\n", speed_left, speed_right);
 	
@@ -89,9 +90,9 @@ void move() {
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
     printf("##BACK##\n");
-	set_motor(1, 50); 
-	set_motor(2, -50); //back so -ve right motor
-	sleep1(0, 200000); //0.2 sec
+	set_motor(1, -50); 
+	set_motor(2, 50); //back so -ve right motor
+	sleep1(0, 100000); //0.1 sec
 }
 
 /**
@@ -175,15 +176,13 @@ void find_line() {
             pix_r[i] = 0;
         }
 	}
-    
+	delta_err = err1 - err2;
     if (nwp != 0) { //if no white pixels
 		err1 = err1/nwp;
 		move(err1);
 	} else {
 		back(); //no white pixels found, we have lost the line
 	}
-    
-    delta_err = err1 - err2;
 }
 
 /**
