@@ -100,8 +100,8 @@ Unfortunately we were unable to get to use the 3D printers on Tuesday. We comple
 ### Week 4
 - [ ] [ALL] Quad 1&2&3 complete
 - [ ] [SOFTWARE] Test code
-- [ ] [SOFTWARE] Robot can follow line
-- [ ] [SOFTWARE] WiFi gate works
+- [x] [SOFTWARE] Robot can follow line
+- [x] [SOFTWARE] WiFi gate works
 - [ ] [SOFTWARE] Refine constants
 
 #### Review
