@@ -9,21 +9,12 @@
 #include "E101.h"
 
 //constants
-const int THRESHOLD = 100;
+const int THRESHOLD = 80;
 const int GATE_DIST = 0;
 const int WALL_DIST = 0;
 
-const double SC_1 = 0.004; //error scale
-const double SC_2 = 0.006; //derivitive scale
-
-//things for networking
-/*
-extern "C" int init(int d_lev);
-extern "C" int connect_to_server( char server_addr[15],int port);
-extern "C" int send_to_server(char message[24]);
-extern "C" int receive_from_server(char message[24]);
-extern "C" int read_analog(int ch_adc); 
-*/
+const double SC_1 = 0.4; //error scale
+const double SC_2 = 0.00005; //derivitive scale
 
 int quadrant = 1; //stores the number of the current quadrant
 
@@ -52,27 +43,28 @@ void move(int err){
 	//Move towards the white line
 	int speed_left;
 	int speed_right;
-	
+
 	speed_left = 35 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 	speed_right = 35 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
 //    	speed_left = 35 - (int)((double)err*SC_1);
 //	speed_right = 35 + (int)((double)err*SC_1);
+
     if(speed_left > 250) {
-        speed_left = 250;    
+        speed_left = 250;
     } else if(speed_left < -250) {
         speed_left = -250;
     }
-	
+
     if(speed_right > 250) {
-        speed_right = 250;    
+        speed_right = 250;
     } else if(speed_right < -250) {
         speed_right = -250;
     }
-	set_motor(1, speed_right);  
+	set_motor(1, speed_right);
 	set_motor(2, speed_left * -1); //right so must move in -ve direction
-    
-    printf("Left: %d, Right: %d\n", speed_left, speed_right);
-	
+
+//    printf("Left: %d, Right: %d\n", speed_left, speed_right);
+
     sleep1(0, 50000); //50ms
 }
 
@@ -81,7 +73,7 @@ void move(int err){
  */
 void move() {
     int speed_left;
-	int speed_right;
+    int speed_right;
 }
 
 /**
@@ -90,8 +82,8 @@ void move() {
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
     printf("##BACK##\n");
-	set_motor(1, -50); 
-	set_motor(2, 50); //back so -ve right motor
+	set_motor(1, -10);
+	set_motor(2, 100);
 	sleep1(0, 100000); //0.1 sec
 }
 
@@ -154,9 +146,9 @@ void find_line() {
 			pix1[i] = 1;
             err1 = err1 + (i-160);
 			nwp++;
-		} else {
-			pix1[i] = 0;
-		}
+	} else {
+            pix1[i] = 0;
+	}
         
         //second row of pixels
         pix2[i] = get_pixel(20, i, 3);
@@ -177,9 +169,12 @@ void find_line() {
         }
 	}
 	delta_err = err1 - err2;
-    if (nwp != 0) { //if no white pixels
+printf("DERR: %d\n", (int)delta_err*SC_2);
+
+	if (nwp != 0) { //if no white pixels
 		err1 = err1/nwp;
 		move(err1);
+		printf("NWP: %d, ERR: %d\n", nwp, err1);
 	} else {
 		back(); //no white pixels found, we have lost the line
 	}
