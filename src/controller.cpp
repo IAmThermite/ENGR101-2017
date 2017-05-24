@@ -29,9 +29,12 @@ char pix_r[320];
  * returns the ir reading for the distance to the gate
  */
 int distance_to_wall() {
-	int distance;
-	distance = read_analog(0); //ir is at A0
-	return distance;
+    int total = 0;
+    
+    for(int i = 0; i < 5; i++) {
+	    total = total + read_analog(0); //ir is at A0
+    }
+	return (int)(total/5);
 }
 
 
@@ -40,14 +43,11 @@ int distance_to_wall() {
  * from the line
  */
 void move(int err){
-	//Move towards the white line
 	int speed_left;
 	int speed_right;
 
 	speed_left = 35 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 	speed_right = 35 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-//    	speed_left = 35 - (int)((double)err*SC_1);
-//	speed_right = 35 + (int)((double)err*SC_1);
 
     if(speed_left > 250) {
         speed_left = 250;
@@ -63,7 +63,6 @@ void move(int err){
 	set_motor(1, speed_right);
 	set_motor(2, speed_left * -1); //right so must move in -ve direction
 
-//    printf("Left: %d, Right: %d\n", speed_left, speed_right);
 
     sleep1(0, 50000); //50ms
 }
@@ -80,14 +79,22 @@ void back(){
 	sleep1(0, 100000); //0.1 sec
 }
 
+/** 
+ * Turns the robot left
+ */
 void turn_left(){
+    printf("##LEFT##\n");
 	set_motor(1, 60); 
-	set_motor(2, 0); //back so -ve right motor
+	set_motor(2, 0);
     sleep1(0, 300000); //might need to adjust this
 }
 
+/** 
+ * Turns the robot right
+ */
 void turn_right(){
-	set_motor(1, 0); 
+	printf("##RIGHT##\n");
+    set_motor(1, 0); 
 	set_motor(2, -60);
     sleep1(0, 300000); //might need to adjust this
 }
