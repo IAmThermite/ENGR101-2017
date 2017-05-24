@@ -82,14 +82,14 @@ void back(){
 
 void turn_left(){
 	set_motor(1, 60); 
-	set_motor(2, -40); //back so -ve right motor
-    sleep1(0, 50000); //might need to adjust this
+	set_motor(2, 0); //back so -ve right motor
+    sleep1(0, 300000); //might need to adjust this
 }
 
 void turn_right(){
-	set_motor(1, 40); 
+	set_motor(1, 0); 
 	set_motor(2, -60);
-    sleep1(0, 50000); //might need to adjust this
+    sleep1(0, 300000); //might need to adjust this
 }
 
 /**
@@ -190,64 +190,79 @@ printf("DERR: %d\n", (int)delta_err*SC_2);
  */
 void find_line_maze() {
 	int nwp = 0;
-	bool front_line;
-	bool left_line;
-	bool right_line;
+	
+    bool front_line = false;
+	bool left_line = false;
+	bool right_line = false;
+    
 	char pixF[320];
 	char pixR[240];
 	char pixL[240];
+    
+	while(true) {
+        take_picture();
+        for (int i=0; i<320; i++){
+            pixF[i] = get_pixel(20, i, 3);
+
+            if (pixF[i] > THRESHOLD){ //therefore white pixel
+                pixF[i] = 1;
+                nwp++;
+            } else {
+                pixF[i] = 0;
+            }
+        }
+
+        if (nwp>20){
+            front_line = true;
+            break;
+        }
+
+
+        nwp = 0;
+        for (int i=0; i<240; i++){
+            pixL[i] = get_pixel(i, 20, 3);
+
+            if (pixL[i] > THRESHOLD){ //therefore white pixel
+                pixL[i] = 1;
+                nwp++;
+            } else {
+                pixL[i] = 0;
+            }
+        }
+
+        if (nwp>20){
+            left_line = true;
+            break;
+        }
+
+
+        nwp = 0;
+        for (int i=0; i<240; i++){
+            pixR[i] = get_pixel(i, 300, 3);
+
+            if (pixR[i] > THRESHOLD){ //therefore white pixel
+                pixR[i] = 1;
+                nwp++;
+            } else {
+                pixR[i] = 0;
+            }
+        }
+
+        if (nwp>20){
+            right_line = true;
+            break;
+        }
+        
+        back(); //obvoiusly broken
+    }
 	
-    take_picture();
-	for (int i=0; i<320; i++){
-		pixF[i] = get_pixel(20, i, 3);
 	
-		if (pixF[i] > THRESHOLD){ //therefore white pixel
-				pixF[i] = 1;
-				nwp++
-			} else {
-				pixF[i] = 0;
-			}
-	}
-	if (nwp>5){
-		front_line = true;
-	}
-	nwp = 0;
-	for (int i=0; i<240; i++){
-		pixL[i] = get_pixel(i, 20, 3);
-	
-		if (pixL[i] > THRESHOLD){ //therefore white pixel
-				pixL[i] = 1;
-				nwp++
-			} else {
-				pixL[i] = 0;
-			}
-	}
-	if (nwp>5){
-		left_line = true;
-	}
-	nwp = 0;
-	for (int i=0; i<240; i++){
-		pixR[i] = get_pixel(i, 300, 3);
-	
-		if (pixR[i] > THRESHOLD){ //therefore white pixel
-				pixR[i] = 1;
-				nwp++
-			} else {
-				pixR[i] = 0;
-			}
-	}
-	if (nwp>5){
-		right_line = true;
-	}
-	
-	if (front_line){
+    if (front_line){
 		find_line();
-	}
-	else if (left_line){
+	} else if (left_line){
 		turn_left();
 		find_line();
-	}
-	else if (right_line){
+	} else if (right_line){
 		turn_right();
 		find_line();
 	}
@@ -354,7 +369,7 @@ int main(){
 			printf("	## STARTING QUAD2\n");
 			quadrant2();	
 		} else if(quadrant == 3) {
-            printf("    ## STARTING QUAD2\n");
+            printf("    ## STARTING QUAD3\n");
             quadrant3();   
         }
 	}
