@@ -10,11 +10,11 @@
 
 //constants
 const int THRESHOLD = 80;
-const int GATE_DIST = 0;
+const int GATE_DIST = 300;
 const int WALL_DIST = 0;
 
-const double SC_1 = 0.4; //error scale
-const double SC_2 = 0.00005; //derivitive scale
+const double SC_1 = 0.35; //error scale
+const double SC_2 = 0.001; //derivitive scale
 
 int quadrant = 1; //stores the number of the current quadrant
 
@@ -46,8 +46,8 @@ void move(int err){
 	int speed_left;
 	int speed_right;
 
-	speed_left = 35 - (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
-	speed_right = 35 + (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_left = 35 - (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_right = 35 + (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 
     if(speed_left > 250) {
         speed_left = 250;
@@ -64,7 +64,7 @@ void move(int err){
 	set_motor(2, speed_left * -1); //right so must move in -ve direction
 
 
-    sleep1(0, 50000); //50ms
+    sleep1(0, 30000); //30ms
 }
 
 
@@ -74,9 +74,9 @@ void move(int err){
 void back(){
 	//Error correcting by moving backwards if the whiteline cannot be found until one is found
     printf("##BACK##\n");
-	set_motor(1, -10);
-	set_motor(2, 100);
-	sleep1(0, 100000); //0.1 sec
+	set_motor(1, -30);
+	set_motor(2, 30);
+	sleep1(0, 50000); //0.05 sec
 }
 
 /** 
@@ -311,7 +311,7 @@ void open_gate() {
  */
 void quadrant1() {
     while(true) {
-        if(distance_to_wall() < GATE_DIST) {
+        if(distance_to_wall() > GATE_DIST) {
             open_gate(); //try to open the gate
             quadrant = 2;
             break;
