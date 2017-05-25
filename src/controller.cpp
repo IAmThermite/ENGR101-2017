@@ -16,7 +16,7 @@ const int WALL_DIST = 0;
 const double SC_1 = 0.23; //error scale
 const double SC_2 = 0.001; //derivitive scale
 
-int quadrant = 1; //stores the number of the current quadrant
+int quadrant = 3; //stores the number of the current quadrant
 
 int delta_err = 0; //the change in the error signal (err-prev_err)
 
@@ -181,13 +181,16 @@ void find_line() {
         }
 	}
 	delta_err = err1 - err2;
-printf("DERR: %d\n", (int)delta_err*SC_2);
+    
+    //printf("DERR: %d\n", (int)delta_err*SC_2);
 
 	if (nwp != 0) { //if no white pixels
 		err1 = err1/nwp;
 		move(err1);
-		printf("NWP: %d, ERR: %d\n", nwp, err1);
-	} else {
+	
+    	//printf("NWP: %d, ERR: %d\n", nwp, err1);
+	
+    } else {
 		back(); //no white pixels found, we have lost the line
 	}
 }
@@ -208,6 +211,8 @@ void find_line_maze() {
     
 	while(true) {
         take_picture();
+        
+        //front
         for (int i=0; i<320; i++){
             pixF[i] = get_pixel(20, i, 3);
 
@@ -222,10 +227,12 @@ void find_line_maze() {
         if (nwp>20){
             front_line = true;
             break;
+            
         }
-
-
+        
+        //left
         nwp = 0;
+        printf("Left loop\n");
         for (int i=0; i<240; i++){
             pixL[i] = get_pixel(i, 20, 3);
 
@@ -243,7 +250,9 @@ void find_line_maze() {
         }
 
 
+        //right
         nwp = 0;
+        printf("Right loop\n");
         for (int i=0; i<240; i++){
             pixR[i] = get_pixel(i, 300, 3);
 
