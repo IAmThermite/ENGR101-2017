@@ -10,6 +10,7 @@
 
 //constants
 const int THRESHOLD = 80;
+const int RED_THRESHOLD = 200;
 const int GATE_DIST = 300;
 const int WALL_DIST = 0;
 
@@ -84,9 +85,9 @@ void back(){
  */
 void turn_left(){
     printf("##LEFT##\n");
-	set_motor(1, 60); 
-	set_motor(2, 0);
-    sleep1(1, 1); //might need to adjust this
+	set_motor(1,-40); 
+	set_motor(2, -40);
+    sleep1(2, 500000); //might need to adjust this
 }
 
 /** 
@@ -94,9 +95,9 @@ void turn_left(){
  */
 void turn_right(){
 	printf("##RIGHT##\n");
-    set_motor(1, 0); 
-	set_motor(2, -60);
-    sleep1(0, 300000); //might need to adjust this
+    set_motor(1, 40);
+	set_motor(2, 40);
+    sleep1(2, 500000); //might need to adjust this
 }
 
 /**
@@ -174,7 +175,7 @@ void find_line() {
         
         pix_r[i] = get_pixel(120, i, 0); //get red chanel
         
-        if(pix_r[i] > THRESHOLD) {
+        if(pix_r[i] > RED_THRESHOLD) {
             pix_r[i] = 1;
         } else {
             pix_r[i] = 0;
@@ -200,18 +201,18 @@ void find_line() {
  */
 void find_line_maze() {
 	int nwp = 0;
-	
+
     bool front_line = false;
 	bool left_line = false;
 	bool right_line = false;
-    
+
 	char pixF[320];
 	char pixR[240];
 	char pixL[240];
-    
+
 	while(true) {
         take_picture();
-        
+
         //front
         for (int i=0; i<320; i++){
             pixF[i] = get_pixel(20, i, 3);
@@ -223,7 +224,7 @@ void find_line_maze() {
                 pixF[i] = 0;
             }
         }
-
+	printf("NWP: %d\n", nwp);
         if (nwp>20){
             front_line = true;
             break;
@@ -242,7 +243,7 @@ void find_line_maze() {
                 pixL[i] = 0;
             }
         }
-
+	printf("NWP: %d\n", nwp);
         if (nwp>20){
             left_line = true;
             break;
@@ -261,7 +262,7 @@ void find_line_maze() {
                 pixR[i] = 0;
             }
         }
-
+	printf("NWP: %d\n", nwp);
         if (nwp>20){
             right_line = true;
             break;
@@ -272,6 +273,7 @@ void find_line_maze() {
 	
 	
     if (front_line){
+		printf("FRONT\n");
 		find_line();
 	} else if (left_line){
 		turn_left();
@@ -376,17 +378,20 @@ int main(){
     sleep1(0, 1000); //sleep a bit
     
     while(true) {
-		if(quadrant == 1) {
-			printf("	## STARTING QUAD1\n");
-			quadrant1();
-		} else if(quadrant == 2) {
-			printf("	## STARTING QUAD2\n");
-			quadrant2();	
-		} else if(quadrant == 3) {
+	if(quadrant == 1) {
+		printf("	## STARTING QUAD1\n");
+		quadrant1();
+	} else if(quadrant == 2) {
+		printf("	## STARTING QUAD2\n");
+		quadrant2();	
+	} else if(quadrant == 3) {
             printf("    ## STARTING QUAD3\n");
             quadrant3();   
-        }
+        } else if(quadrant == 4) {
+		printf("	## STARTING QUAD4\n");
 	}
+
+    }
     
     return 0;
 }
