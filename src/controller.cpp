@@ -86,7 +86,7 @@ void turn_left(){
     printf("##LEFT##\n");
 	set_motor(1, 60); 
 	set_motor(2, 0);
-    sleep1(0, 300000); //might need to adjust this
+    sleep1(1, 1); //might need to adjust this
 }
 
 /** 
@@ -232,7 +232,6 @@ void find_line_maze() {
         
         //left
         nwp = 0;
-        printf("Left loop\n");
         for (int i=0; i<240; i++){
             pixL[i] = get_pixel(i, 20, 3);
 
@@ -252,7 +251,6 @@ void find_line_maze() {
 
         //right
         nwp = 0;
-        printf("Right loop\n");
         for (int i=0; i<240; i++){
             pixR[i] = get_pixel(i, 300, 3);
 
