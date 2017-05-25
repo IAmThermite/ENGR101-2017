@@ -13,7 +13,7 @@ const int THRESHOLD = 80;
 const int GATE_DIST = 300;
 const int WALL_DIST = 0;
 
-const double SC_1 = 0.35; //error scale
+const double SC_1 = 0.23; //error scale
 const double SC_2 = 0.001; //derivitive scale
 
 int quadrant = 1; //stores the number of the current quadrant
