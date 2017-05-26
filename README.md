@@ -23,6 +23,7 @@
    <th colspan="3">Final robot designs</th>
    <tr>
       <td><img src="images/robot-battery.jpg" alt="Complete robot without battery" width="200px" /></td>
+      <td colspan="2"><img src="images/Robot-complete.jpg" alt="Complete robot" width="400px" /></td>
    </tr>
 </table>
 
