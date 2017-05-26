@@ -99,16 +99,16 @@ Unfortunately we were unable to get to use the 3D printers on Tuesday. We comple
 
 ### Week 4
 - [ ] [ALL] Quad 1&2&3 complete
-- [ ] [SOFTWARE] Test code
+- [x] [SOFTWARE] Test code
 - [x] [SOFTWARE] Robot can follow line
 - [x] [SOFTWARE] WiFi gate works
-- [ ] [SOFTWARE] Refine constants
+- [x] [SOFTWARE] Refine constants
 
 #### Review
-
+We made a huge amount of progress on the robot this week. On Tuesday we began testing and got the robot to follow the line. The constants are all working as expected. The robot can go through Quad 1 and 2 all the time and Quad 3 is very nealy complete. We had to change the rear wheel to a marble as the robot was not turning correctly in Quad 3. Code for Quad 4 needs to be written however the chassis is complete.
 
 ### Week 5
-- [ ] [ALL] Quad 4 complete
+- [ ] [ALL] Quad Quad 1&2&3&4 complete
 - [ ] [ALL] Finishing touches
 - [ ] AVC CHALLENGE COMPLETED!
 
