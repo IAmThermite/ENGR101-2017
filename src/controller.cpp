@@ -26,10 +26,12 @@ char pix1[320]; //first row of pixels
 char pix2[320]; //second row of pixels
 char pix_r[320];
 
+
+//IR METHODS
 /**
- * returns the ir reading for the distance to the gate
+ * returns the ir reading for the front IR sensor
  */
-int distance_to_wall() {
+int distance_to_wall_front() {
     int total = 0;
     
     for(int i = 0; i < 5; i++) {
@@ -38,7 +40,20 @@ int distance_to_wall() {
 	return (int)(total/5);
 }
 
+/**
+ * returns the ir reading for the left IR sensor
+ */
+int distance_to_wall_front() {
+    int total = 0;
+    
+    for(int i = 0; i < 5; i++) {
+	    total = total + read_analog(1); //ir is at A1
+    }
+	return (int)(total/5);
+}
 
+
+//MOVE METHODS
 /**
  * moves the robot depending on the distance
  * from the line
@@ -100,6 +115,8 @@ void turn_right(){
     sleep1(2, 500000); //might need to adjust this
 }
 
+
+//LINE READING METHODS
 /**
  * Checks to see if the line is completely white
  * in which case we are in quad3
@@ -118,7 +135,6 @@ void turn_right(){
     } else {
         return false;
     }
-    
 }
 
 /**
@@ -285,6 +301,8 @@ void find_line_maze() {
 	
 }
 
+
+//MISC METHODS
 /**
  * Trys to open the gate
  */
@@ -320,7 +338,7 @@ void open_gate() {
  */
 void quadrant1() {
     while(true) {
-        if(distance_to_wall() > GATE_DIST) {
+        if(distance_to_wall_front() > GATE_DIST) {
             open_gate(); //try to open the gate
             quadrant = 2;
             break;
@@ -367,6 +385,7 @@ void quadrant4() {
         
     }    
 }
+
 
 /**
  * Main method
