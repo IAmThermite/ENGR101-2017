@@ -12,9 +12,9 @@
 const int THRESHOLD = 80; //white value
 const int RED_THRESHOLD = 200; //red value
 const int GATE_DIST = 300; //distance to gate
-const int WALL_DIST = 0; //front ir to wall close
-const int WALL_DIST_2 = 0; //front ir to wall farther
-const int WALL_DIST_3 = 0; //left ir to wall, should be as close to this value as possible
+const int WALL_DIST = 400; //front ir to wall close
+const int WALL_DIST_2 = 300; //front ir to wall farther
+const int WALL_DIST_3 = 450; //left ir to wall, should be as close to this value as possible
 
 const double SC_1 = 0.23; //error scale
 const double SC_2 = 0.001; //derivitive scale
@@ -79,7 +79,7 @@ int get_num_pixels(int row, int channel) {
  * returns the number of white pixels on the column
  * takes the channel and column as inputs
  */
-int get_num_pixels_col(int col, in channel) {
+int get_num_pixels_col(int col, int channel) {
     int num;
     
     take_picture();
@@ -160,8 +160,8 @@ void move(int err, int delta_err) {
  */
 void move_ir(int err) {
     
-    int left_speed;
-    int right_speed;
+    int speed_left;
+    int speed_right;
     
     speed_left = 50 - (int)((double)err*SC_IR);
 	speed_right = 50 + (int)((double)err*SC_IR);
@@ -249,7 +249,7 @@ void turn_right_ir() { //turn left for 2.5 sec
  * in which case we are in quad3
  */
 bool is_full_white_line() {    
-    if(get_pixels(3) > 270) {
+    if(get_pixel(3) > 270) {
         return true;
     } else {
         return false;
@@ -260,7 +260,7 @@ bool is_full_white_line() {
  * Checks to see if the line is completely red
  */
 bool is_full_red_line() {
-    if(get_pixels(0) > 270) {
+    if(get_pixel(0) > 270) {
         return true;
     } else {
         return false;
@@ -364,7 +364,10 @@ void quadrant1() {
     while(true) {
         if(get_distance_to_wall(0) > GATE_DIST) {
             open_gate(); //try to open the gate
-            quadrant = 2;
+            quadrant = pp:167:2: error: ‘speed_right’ was not declared in this scope
+  speed_right = 50 + (int)((double)err*SC_IR);
+  ^
+2;
             break;
             
         } else {
