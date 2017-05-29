@@ -249,7 +249,7 @@ void turn_right_ir() { //turn left for 2.5 sec
  * in which case we are in quad3
  */
 bool is_full_white_line() {    
-    if(get_pixel(3) > 270) {
+    if(get_pixel(120, 3) > 270) {
         return true;
     } else {
         return false;
@@ -260,7 +260,7 @@ bool is_full_white_line() {
  * Checks to see if the line is completely red
  */
 bool is_full_red_line() {
-    if(get_pixel(0) > 270) {
+    if(get_pixel(120, 0) > 270) {
         return true;
     } else {
         return false;
@@ -364,10 +364,7 @@ void quadrant1() {
     while(true) {
         if(get_distance_to_wall(0) > GATE_DIST) {
             open_gate(); //try to open the gate
-            quadrant = pp:167:2: error: ‘speed_right’ was not declared in this scope
-  speed_right = 50 + (int)((double)err*SC_IR);
-  ^
-2;
+            quadrant = 2;
             break;
             
         } else {
