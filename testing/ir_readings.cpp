@@ -20,5 +20,17 @@ void main() {
     }
     
     printf("    Ave of %d average readings: %d\n", readings, total_ave/readings);
+    
+    for(int i = 0; i < readings; i++) {
+        for(int j = 0; j < readings; j++) {
+            adc_reading = read_analog(1);
+            
+            sleep1(0, 100000);
+            total = total+adc_reading;
+        }
+        printf("Ave of %d readings: %d\n", readings, total/readings);
+    }
+    
+    printf("    Ave of %d average readings: %d\n", readings, total_ave/readings);
 
 }
