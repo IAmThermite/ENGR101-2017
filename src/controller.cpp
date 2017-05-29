@@ -249,7 +249,7 @@ void turn_right_ir() { //turn left for 2.5 sec
  * in which case we are in quad3
  */
 bool is_full_white_line() {    
-    if(get_pixel(120, 3) > 270) {
+    if(get_num_pixels(120, 3) > 270) {
         return true;
     } else {
         return false;
@@ -260,7 +260,7 @@ bool is_full_white_line() {
  * Checks to see if the line is completely red
  */
 bool is_full_red_line() {
-    if(get_pixel(120, 0) > 270) {
+    if(get_num_pixels(120, 0) > 270) {
         return true;
     } else {
         return false;
