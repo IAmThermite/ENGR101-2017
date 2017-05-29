@@ -85,7 +85,13 @@ int get_num_pixels_col(int col, int channel) {
     take_picture();
     for(int i = 0; i < 320; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
-            num++;
+            num++;bool is_full_white_line() {    
+    if(get_num_pixels(120, 3) > 270) {
+        return true;
+    } else {
+        return false;
+    }
+}
         }
     }
     
@@ -106,7 +112,7 @@ int get_error(int row) {
         }
     }
     
-    return err;
+    return (int)(err/get_num_pixels(row, 3));
 }
 
 
@@ -202,7 +208,7 @@ void back() {
 void turn_left_line() {
     printf("##LEFT##\n");
     
-	while(get_num_pixels(120, 3) < 20) { //while it cant find any pixels at front
+	while(get_num_pixels(20, 3) < 20) { //while it cant find any pixels at front
         set_motor(1, -40);
 	    set_motor(2, -40);
         sleep1(0, 10000);
@@ -215,7 +221,7 @@ void turn_left_line() {
 void turn_right_line() {
     printf("##RIGHT##\n");
     
-    while(get_num_pixels(120, 3) < 20) { //while it cant find any pixels at front
+    while(get_num_pixels(20, 3) < 20) { //while it cant find any pixels at front
         set_motor(1, 40);
 	    set_motor(2, 40);
         sleep1(0, 10000);
@@ -334,7 +340,13 @@ void find_wall() {
     int err_front = get_distance_to_wall(0);
     int err_side = get_distance_to_wall(1);
     int err = err = err_side - WALL_DIST_3;
-    
+    bool is_full_white_line() {    
+    if(get_num_pixels(120, 3) > 270) {
+        return true;
+    } else {
+        return false;
+    }
+}
     if(err_front < WALL_DIST) { //not too close at front
         if(err_side > WALL_DIST_3) { // too close to left so shuffle a bit
             move_ir(err); //turn right
