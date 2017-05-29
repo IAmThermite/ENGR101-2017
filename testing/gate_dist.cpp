@@ -4,7 +4,7 @@
 #include "E101.h"
 
 int main() {
-    
+	init();
     int total = 0;
     
     for(int i = 0; i < 5; i++) {
