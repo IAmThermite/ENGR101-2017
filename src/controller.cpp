@@ -222,25 +222,25 @@ void find_line_maze() {
 	bool left_line = false;
 	bool right_line = false;
 
-	char pixF[320];
-	char pixR[240];
-	char pixL[240];
+	char pix_f[320];
+	char pix_r[240];
+	char pix_l[240];
 
 	while(true) {
         take_picture();
 
         //front
         for (int i=0; i<320; i++){
-            pixF[i] = get_pixel(20, i, 3);
+            pix_f[i] = get_pixel(20, i, 3);
 
-            if (pixF[i] > THRESHOLD){ //therefore white pixel
-                pixF[i] = 1;
+            if (pix_f[i] > THRESHOLD){ //therefore white pixel
+                pix_f[i] = 1;
                 nwp++;
             } else {
-                pixF[i] = 0;
+                pix_f[i] = 0;
             }
         }
-	printf("NWP: %d\n", nwp);
+        
         if (nwp>20){
             front_line = true;
             break;
@@ -250,16 +250,16 @@ void find_line_maze() {
         //left
         nwp = 0;
         for (int i=0; i<240; i++){
-            pixL[i] = get_pixel(i, 20, 3);
+            pix_l[i] = get_pixel(i, 20, 3);
 
-            if (pixL[i] > THRESHOLD){ //therefore white pixel
-                pixL[i] = 1;
+            if (pix_l[i] > THRESHOLD){ //therefore white pixel
+                pix_l[i] = 1;
                 nwp++;
             } else {
-                pixL[i] = 0;
+                pix_l[i] = 0;
             }
         }
-	printf("NWP: %d\n", nwp);
+        
         if (nwp>20){
             left_line = true;
             break;
@@ -269,16 +269,16 @@ void find_line_maze() {
         //right
         nwp = 0;
         for (int i=0; i<240; i++){
-            pixR[i] = get_pixel(i, 300, 3);
+            pix_r[i] = get_pixel(i, 300, 3);
 
-            if (pixR[i] > THRESHOLD){ //therefore white pixel
-                pixR[i] = 1;
+            if (pix_r[i] > THRESHOLD){ //therefore white pixel
+                pix_r[i] = 1;
                 nwp++;
             } else {
-                pixR[i] = 0;
+                pix_r[i] = 0;
             }
         }
-	printf("NWP: %d\n", nwp);
+        
         if (nwp>20){
             right_line = true;
             break;
