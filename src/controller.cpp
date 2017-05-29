@@ -85,13 +85,7 @@ int get_num_pixels_col(int col, int channel) {
     take_picture();
     for(int i = 0; i < 320; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
-            num++;bool is_full_white_line() {    
-    if(get_num_pixels(120, 3) > 270) {
-        return true;
-    } else {
-        return false;
-    }
-}
+            num++;
         }
     }
     
@@ -340,13 +334,7 @@ void find_wall() {
     int err_front = get_distance_to_wall(0);
     int err_side = get_distance_to_wall(1);
     int err = err = err_side - WALL_DIST_3;
-    bool is_full_white_line() {    
-    if(get_num_pixels(120, 3) > 270) {
-        return true;
-    } else {
-        return false;
-    }
-}
+    
     if(err_front < WALL_DIST) { //not too close at front
         if(err_side > WALL_DIST_3) { // too close to left so shuffle a bit
             move_ir(err); //turn right
