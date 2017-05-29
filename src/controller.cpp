@@ -327,13 +327,14 @@ void find_line_maze() {
 		find_line();
 	}
 }
+
 /**
- * find the wall, for the IR
+ * find the wall, for the IRWALL_DIST_3
  */
 void find_wall() {
     int err_front = get_distance_to_wall(0);
     int err_side = get_distance_to_wall(1);
-    int err = err = err_side - WALL_DIST_3;
+    int err = err_side - WALL_DIST_3;
     
     if(err_front < WALL_DIST) { //not too close at front
         if(err_side > WALL_DIST_3) { // too close to left so shuffle a bit
@@ -341,7 +342,6 @@ void find_wall() {
             
         } else { //too close right so shuffle a bit
             move_ir(err * -1); //turn left
-        
         }
         
     } else { //too close at front so we need to turn 90
