@@ -119,8 +119,13 @@ int get_error(int row) {
         }
     }
     
-    printf("ERR: %d\n", err/nwp);
-    return (err/nwp);
+    if(nwp <= 0) {
+        return 0;
+    } else {
+        printf("ERR: %d\n", err/nwp);
+        return (err/nwp);
+    }
+    
 }
 
 
