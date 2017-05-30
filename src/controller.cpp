@@ -21,7 +21,7 @@ const double SC_2 = 0.001; //derivitive scale
 
 const double SC_IR = 0.05; //error scale
 
-int quadrant = 4; //stores the number of the current quadrant
+int quadrant = 1; //stores the number of the current quadrant
 
 
 //MISC METHODS
