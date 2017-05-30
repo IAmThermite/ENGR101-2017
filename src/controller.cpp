@@ -54,7 +54,7 @@ void open_gate() {
  * takes the channel and row as inputs
  */
 int get_num_pixels(int row, int channel) {
-    int num;
+    int num = 0;
     
     take_picture();
     
@@ -80,7 +80,7 @@ int get_num_pixels(int row, int channel) {
  * takes the channel and column as inputs
  */
 int get_num_pixels_col(int col, int channel) {
-    int num;
+    int num = 0;
     
     take_picture();
     for(int i = 0; i < 320; i++) {
@@ -98,7 +98,7 @@ int get_num_pixels_col(int col, int channel) {
  * takes the row as an input
  */
 int get_error(int row) {
-    int err;
+    int err = 0;
     int nwp = get_num_pixels(row, 3);
     
     take_picture();
