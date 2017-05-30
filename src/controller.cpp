@@ -16,7 +16,7 @@ const int WALL_DIST = 400; //front ir to wall close
 const int WALL_DIST_2 = 300; //front ir to wall farther
 const int WALL_DIST_3 = 450; //left ir to wall, should be as close to this value as possible
 
-const double SC_1 = 0.23; //error scale
+const double SC_1 = 0.3; //error scale
 const double SC_2 = 0.001; //derivitive scale
 
 const double SC_IR = 0.05; //error scale
@@ -90,7 +90,7 @@ int get_num_pixels_col(int col, int channel) {
     take_picture();
     sleep1(0, 3000);
     
-    for(int i = 0; i < 320; i++) {
+    for(int i = 0; i < 240; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
             num++;
         }
@@ -211,9 +211,9 @@ void move_ir(int err) {
 void back() {
 	//Error correcting by moving backwards if the whiteline cannot be found
     printf("##BACK##\n");
-	set_motor(1, -30);
-	set_motor(2, 30);
-	sleep1(0, 50000); //50ms
+	set_motor(1, -40);
+	set_motor(2, 40);
+	sleep1(0, 70000); //70ms
 }
 
 /** 
