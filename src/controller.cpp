@@ -55,24 +55,28 @@ void open_gate() {
  */
 int get_num_pixels(int row, int channel) {
     int num = 0;
+    char pix[320];
     
     take_picture();
     sleep1(0, 3000);
     
     if(channel == 3) { //white
         for(int i = 0; i < 320; i++) {
-            if(get_pixel(row, i, channel) > THRESHOLD) {
+            pix[i] = get_pixel(row, i, channel);
+            if(pix[i] > THRESHOLD) {
                 num++;
             }
         }
     } else { //not white so must be red
         for(int i = 0; i < 320; i++) {
-            if(get_pixel(row, i, channel) > RED_THRESHOLD) {
+            pix[i] = get_pixel(row, i, channel);
+            if(pix[i] > RED_THRESHOLD) {
                 num++;
             }
         }
     }
     
+    printf("NUM: %d\n", num);
     return num;
 }
 
@@ -103,18 +107,20 @@ int get_num_pixels_col(int col, int channel) {
 int get_error(int row) {
     int err = 0;
     int nwp = get_num_pixels(row, 3);
+    char pix[320];
     
     take_picture();
     sleep1(0, 3000);
     
     for(int i = 0; i < 320; i++) {
-        if(get_pixel(row, i, 3) > THRESHOLD) {
+        pix[i] = get_pixel(120, i, 3);
+        if(pix[i] > THRESHOLD) {
             err = err + (i-160);
         }
     }
     
-    printf("ERR: %d\n", (int)(err/nwp));
-    return (int)(err/nwp);
+    printf("ERR: %d\n", err/nwp);
+    return (err/nwp);
 }
 
 
@@ -257,7 +263,7 @@ void turn_right_ir() { //turn left for 2.5 sec
  * Checks to see if the line is completely white
  * in which case we are in quad3
  */
-bool is_full_white_line() {    
+bool is_full_white_line() {
     if(get_num_pixels(120, 3) > 270) {
         return true;
     } else {
