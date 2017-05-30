@@ -16,7 +16,7 @@ const int WALL_DIST = 400; //front ir to wall close
 const int WALL_DIST_2 = 300; //front ir to wall farther
 const int WALL_DIST_3 = 450; //left ir to wall, should be as close to this value as possible
 
-const double SC_1 = 0.3; //error scale
+const double SC_1 = 0.65; //error scale
 const double SC_2 = 0.001; //derivitive scale
 
 const double SC_IR = 0.05; //error scale
@@ -153,8 +153,8 @@ void move(int err, int delta_err) {
 	int speed_left;
 	int speed_right;
 
-	speed_left = 35 - (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-	speed_right = 35 + (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_left = 50 - (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_right = 50 + (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 
     //ensure that the speed of the motors does not exceed 250/-250
     if(speed_left > 250) {
