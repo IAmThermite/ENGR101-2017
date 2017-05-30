@@ -89,6 +89,7 @@ int get_num_pixels_col(int col, int channel) {
         }
     }
     
+    printf("NUM: %d\n", num);
     return num;
 }
 
@@ -98,6 +99,7 @@ int get_num_pixels_col(int col, int channel) {
  */
 int get_error(int row) {
     int err;
+    int nwp = get_num_pixels(row, 3);
     
     take_picture();
     for(int i = 0; i < 320; i++) {
@@ -106,7 +108,8 @@ int get_error(int row) {
         }
     }
     
-    return (int)(err/get_num_pixels(row, 3));
+    printf("ERR: %d\n", (int)(err/nwp));
+    return (int)(err/nwp);
 }
 
 
@@ -427,10 +430,11 @@ int main(){
             printf("	## STARTING QUAD2\n");
             quadrant2();	
         } else if(quadrant == 3) {
-                printf("    ## STARTING QUAD3\n");
-                quadrant3();   
-            } else if(quadrant == 4) {
+            printf("    ## STARTING QUAD3\n");
+            quadrant3();   
+        } else if(quadrant == 4) {
             printf("	## STARTING QUAD4\n");
+            quadrant4();
         }
     }
     
