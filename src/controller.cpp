@@ -10,18 +10,18 @@
 
 //constants
 const int THRESHOLD = 80; //white value
-const int RED_THRESHOLD = 200; //red value
+const int RED_THRESHOLD = 120; //red value
 const int GATE_DIST = 300; //distance to gate
-const int WALL_DIST = 400; //front ir to wall close
-const int WALL_DIST_2 = 300; //front ir to wall farther
-const int WALL_DIST_3 = 450; //left ir to wall, should be as close to this value as possible
+const int WALL_DIST = 420; //front ir to wall close
+const int WALL_DIST_2 = 250; //front ir to wall farther
+const int WALL_DIST_3 = 500; //left ir to wall, should be as close to this value as possible
 
-const double SC_1 = 0.65; //error scale
+const double SC_1 = 0.9; //error scale
 const double SC_2 = 0.001; //derivitive scale
 
 const double SC_IR = 0.05; //error scale
 
-int quadrant = 1; //stores the number of the current quadrant
+int quadrant = 4; //stores the number of the current quadrant
 
 
 //MISC METHODS
@@ -58,8 +58,7 @@ int get_num_pixels(int row, int channel) {
     char pix[320];
     
     take_picture();
-    sleep1(0, 3000);
-    
+
     if(channel == 3) { //white
         for(int i = 0; i < 320; i++) {
             pix[i] = get_pixel(row, i, channel);
@@ -75,8 +74,7 @@ int get_num_pixels(int row, int channel) {
             }
         }
     }
-    
-    printf("NUM: %d\n", num);
+
     return num;
 }
 
@@ -88,7 +86,6 @@ int get_num_pixels_col(int col, int channel) {
     int num = 0;
     
     take_picture();
-    sleep1(0, 3000);
     
     for(int i = 0; i < 240; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
@@ -110,7 +107,6 @@ int get_error(int row) {
     char pix[320];
     
     take_picture();
-    sleep1(0, 3000);
     
     for(int i = 0; i < 320; i++) {
         pix[i] = get_pixel(120, i, 3);
@@ -122,7 +118,6 @@ int get_error(int row) {
     if(nwp <= 0) {
         return 0;
     } else {
-        printf("ERR: %d\n", err/nwp);
         return (err/nwp);
     }
     
@@ -138,7 +133,6 @@ int get_distance_to_wall(int pin) {
     
     for(int i = 0; i < 5; i++) {
 	    total = total + read_analog(pin); //ir is at A0
-        sleep1(0, 1000);
     }
 	return (int)(total/5);
 }
@@ -153,8 +147,8 @@ void move(int err, int delta_err) {
 	int speed_left;
 	int speed_right;
 
-	speed_left = 50 - (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
-	speed_right = 50 + (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
+	speed_left = 35 - (int)((double)err*SC_1) + (int)((double)delta_err*SC_2);
+	speed_right = 35 + (int)((double)err*SC_1) - (int)((double)delta_err*SC_2);
 
     //ensure that the speed of the motors does not exceed 250/-250
     if(speed_left > 250) {
@@ -184,8 +178,7 @@ void move_ir(int err) {
     int speed_right;
     
     speed_left = 50 - (int)((double)err*SC_IR);
-	speed_right = 50 + (int)((double)err*SC_IR);
-
+    speed_right = 50 + (int)((double)err*SC_IR);
     //ensure that the speed of the motors does not exceed 250/-250
     if(speed_left > 250) {
         speed_left = 250;
@@ -198,6 +191,8 @@ void move_ir(int err) {
     } else if(speed_right < -250) {
         speed_right = -250;
     }
+
+    printf("l: %d, r: %d\n", speed_left, speed_right);
     
 	set_motor(1, speed_right);
 	set_motor(2, speed_left * -1); //right so must move in -ve direction
@@ -222,9 +217,9 @@ void back() {
 void turn_left_line() {
     printf("##LEFT##\n");
     
-	while(get_num_pixels(20, 3) < 20) { //while it cant find any pixels at front
-        set_motor(1, -40);
-	    set_motor(2, -40);
+    while(get_num_pixels(40, 3) < 10) { //while it cant find any pixels at front
+	set_motor(1, -40);
+	set_motor(2, -40);
         sleep1(0, 10000);
     }
 }
@@ -235,7 +230,7 @@ void turn_left_line() {
 void turn_right_line() {
     printf("##RIGHT##\n");
     
-    while(get_num_pixels(20, 3) < 20) { //while it cant find any pixels at front
+    while(get_num_pixels(40, 3) < 10) { //while it cant find any pixels at front
         set_motor(1, 40);
 	    set_motor(2, 40);
         sleep1(0, 10000);
@@ -247,9 +242,12 @@ void turn_right_line() {
  */
 void turn_left_ir() { //turn left for 2.5 sec
     printf("##IR LEFT##\n");
-    set_motor(1, -40);
-    set_motor(2, -40);
-    sleep1(2, 500000);
+    while(get_distance_to_wall(0) > WALL_DIST_2){
+        set_motor(1, -40);
+        set_motor(2, -40);
+        sleep1(0, 50000);
+    }
+
 }
 
 /**
@@ -257,9 +255,11 @@ void turn_left_ir() { //turn left for 2.5 sec
  */
 void turn_right_ir() { //turn left for 2.5 sec
     printf("##IR RIGHT##\n");
-    set_motor(1, 40);
-    set_motor(2, 40);
-    sleep1(2, 500000);
+    while(get_distance_to_wall(0) > WALL_DIST_2){
+        set_motor(1, 40);
+        set_motor(2, 40);
+        sleep1(0, 50000);
+    }
 }
 
 
@@ -358,10 +358,10 @@ void find_wall() {
     
     if(err_front < WALL_DIST) { //not too close at front
         if(err_side > WALL_DIST_3) { // too close to left so shuffle a bit
-            move_ir(err); //turn right
+            move_ir(err * -1); //turn right
             
         } else { //too close right so shuffle a bit
-            move_ir(err * -1); //turn left
+            move_ir(err); //turn left
         }
         
     } else { //too close at front so we need to turn 90
@@ -454,6 +454,6 @@ int main(){
             quadrant4();
         }
     }
-    
+
     return 0;
 }
