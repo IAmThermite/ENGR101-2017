@@ -57,7 +57,7 @@ int get_num_pixels(int row, int channel) {
     int num = 0;
     
     take_picture();
-    sleep1(0, 1000);
+    sleep1(0, 3000);
     
     if(channel == 3) { //white
         for(int i = 0; i < 320; i++) {
@@ -84,7 +84,7 @@ int get_num_pixels_col(int col, int channel) {
     int num = 0;
     
     take_picture();
-    sleep1(0, 1000);
+    sleep1(0, 3000);
     
     for(int i = 0; i < 320; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
@@ -105,7 +105,7 @@ int get_error(int row) {
     int nwp = get_num_pixels(row, 3);
     
     take_picture();
-    sleep1(0, 1000);
+    sleep1(0, 3000);
     
     for(int i = 0; i < 320; i++) {
         if(get_pixel(row, i, 3) > THRESHOLD) {
