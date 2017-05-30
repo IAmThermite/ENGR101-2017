@@ -57,6 +57,7 @@ int get_num_pixels(int row, int channel) {
     int num = 0;
     
     take_picture();
+    sleep1(0, 1000);
     
     if(channel == 3) { //white
         for(int i = 0; i < 320; i++) {
@@ -83,6 +84,8 @@ int get_num_pixels_col(int col, int channel) {
     int num = 0;
     
     take_picture();
+    sleep1(0, 1000);
+    
     for(int i = 0; i < 320; i++) {
         if(get_pixel(i, col, channel) > THRESHOLD) {
             num++;
@@ -102,6 +105,8 @@ int get_error(int row) {
     int nwp = get_num_pixels(row, 3);
     
     take_picture();
+    sleep1(0, 1000);
+    
     for(int i = 0; i < 320; i++) {
         if(get_pixel(row, i, 3) > THRESHOLD) {
             err = err + (i-160);
@@ -122,6 +127,7 @@ int get_distance_to_wall(int pin) {
     
     for(int i = 0; i < 5; i++) {
 	    total = total + read_analog(pin); //ir is at A0
+        sleep1(0, 1000);
     }
 	return (int)(total/5);
 }
