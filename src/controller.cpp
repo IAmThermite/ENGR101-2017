@@ -16,8 +16,8 @@ const int WALL_DIST = 420; //front ir to wall close
 const int WALL_DIST_2 = 200; //front ir to wall farther
 const int WALL_DIST_3 = 500; //left ir to wall, should be as close to this value as possible
 
-const double SC_1 = 0.9; //error scale
-const double SC_2 = 0.001; //derivitive scale
+const double SC_1 = 0.12; //error scale
+const double SC_2 = 0.03; //derivitive scale
 
 const double SC_IR = 0.05; //error scale
 
@@ -162,7 +162,9 @@ void move(int err, int delta_err) {
     } else if(speed_right < -250) {
         speed_right = -250;
     }
-    
+    printf("err:%d derr:%d\n", (int)(err*SC_1), (int)(delta_err*SC_2));
+    printf("L:%d R:%d\n", speed_left, speed_right);
+
 	set_motor(1, speed_right);
 	set_motor(2, speed_left * -1); //right so must move in -ve direction
 
@@ -299,10 +301,8 @@ void find_line() {
     int nwp = get_num_pixels(120, 3); //Number of white pixels
 	int delta_err = err1 - err2;
     
-    printf("ERR:%d DERR:%d\n", err1, delta_err);
-
 	if (nwp != 0) { //if no white pixels
-		err1 = (int)(err1/nwp);
+		err1 = (int)(err1);
 		move(err1, delta_err);
 	
     } else {
