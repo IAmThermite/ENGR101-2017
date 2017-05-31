@@ -13,7 +13,7 @@ const int THRESHOLD = 80; //white value
 const int RED_THRESHOLD = 120; //red value
 const int GATE_DIST = 300; //distance to gate
 const int WALL_DIST = 420; //front ir to wall close
-const int WALL_DIST_2 = 250; //front ir to wall farther
+const int WALL_DIST_2 = 200; //front ir to wall farther
 const int WALL_DIST_3 = 500; //left ir to wall, should be as close to this value as possible
 
 const double SC_1 = 0.9; //error scale
@@ -179,6 +179,7 @@ void move_ir(int err) {
     
     speed_left = 50 - (int)((double)err*SC_IR);
     speed_right = 50 + (int)((double)err*SC_IR);
+    
     //ensure that the speed of the motors does not exceed 250/-250
     if(speed_left > 250) {
         speed_left = 250;
@@ -297,6 +298,8 @@ void find_line() {
 	
     int nwp = get_num_pixels(120, 3); //Number of white pixels
 	int delta_err = err1 - err2;
+    
+    printf("ERR:%d DERR:%d\n", err1, delta_err);
 
 	if (nwp != 0) { //if no white pixels
 		err1 = (int)(err1/nwp);
