@@ -110,11 +110,11 @@ We made a huge amount of progress on the robot this week. On Tuesday we began te
 
 ### Week 5
 - [ ] [ALL] Quad Quad 1&2&3&4 complete
-- [ ] [ALL] Finishing touches
-- [ ] AVC CHALLENGE COMPLETED!
+- [x] [ALL] Finishing touches
+- [x] AVC CHALLENGE COMPLETED!
 
 #### Review
-
+A large section of the code and sections of the chassis were modified before the final run. Unfortunately the robot was not complete and it only managed 50% of the maze. This was probably due to a few things. One of the motors had begun to spin slower than the other. This caused it to veer of slightly and not turn correctly. Due to the position of the camera it appeared that it was picking up a little bit of white dust on the track which caused it to veer off completely in Quad 2. Also some parts of the software had not been debuged correctly so changes had to be made quickly and were not completely tested. The chassis got 3 points taken off it due to the back wheel being not very sturdy (it became loose before the maze) and a few other little things
 
 
 ### Weekly Progress Checklist
